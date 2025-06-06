@@ -65,7 +65,7 @@ WSGI_APPLICATION = 'workspace.wsgi.application'
 
 
   DATABASES = {
-      "default": dj_database_url.parse(os.environ.get("DATABASE_URL"))
+      "default": dj_database_url.parse(os.environ.get("postgresql://fncoding:t89AK65uT6yLJui08n9dbfcvQ7tOfwJA@dpg-d11ehu3ipnbc73d27fc0-a.frankfurt-postgres.render.com/kidme"))
   }
 
 # Password validation
