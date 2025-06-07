@@ -9,9 +9,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 load_dotenv(os.path.join(BASE_DIR.parent, '.env'))
 
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY', 'dein-lokaler-fallback-secret-key-wenn-nicht-in-env')
 
-DEBUG = int(os.environ.get('DEBUG', default=0))
+DEBUG = os.environ.get('DEBUG', '0') == '1' # Sicherer Vergleich für '1' oder '0'
 
 # ALLOWED_HOSTS = os.environ.get('DJANGO_ALLOWED_HOSTS').split(' ')
 ALLOWED_HOSTS = ['*']
@@ -64,10 +64,26 @@ WSGI_APPLICATION = 'workspace.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+if DEBUG:
+    # Lokale Entwicklungskonfiguration mit der Docker-PostgreSQL-Datenbank
+    # Die Namen hier (POSTGRES_DB, POSTGRES_USER, POSTGRES_PASSWORD)
+    # müssen mit den Umgebungsvariablen des 'db'-Services in docker-compose.dev.yml
+    # und deiner .env-Datei übereinstimmen.
+    # Der Host 'db' ist der Servicename des Datenbankcontainers in docker-compose.dev.yml.
+    db_user = os.environ.get('POSTGRES_USER', 'devuser')
+    db_password = os.environ.get('POSTGRES_PASSWORD', 'devpass')
+    db_name = os.environ.get('POSTGRES_DB', 'devdb')
+    db_host = 'db' # Service-Name aus docker-compose.dev.yml
+    db_port = '5432'
 
-DATABASES = {
-    'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
-}
+    DATABASES = {
+        'default': dj_database_url.parse(f"postgres://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}")
+    }
+else:
+    # Produktionskonfiguration (z.B. für Render)
+    DATABASES = {
+        'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+    }
 
 
 # Password validation
