@@ -32,6 +32,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware'
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -65,7 +66,7 @@ WSGI_APPLICATION = 'workspace.wsgi.application'
 
 
   DATABASES = {
-      "default": dj_database_url.parse(os.environ.get("postgresql://fncoding:t89AK65uT6yLJui08n9dbfcvQ7tOfwJA@dpg-d11ehu3ipnbc73d27fc0-a.frankfurt-postgres.render.com/kidme"))
+      "default": dj_database_url.parse(os.environ.get("postgresql://fncoding:t89AK65uT6yLJui08n9dbfcvQ7tOfwJA@dpg-d11ehu3ipnbc73d27fc0-a/kidme"))
   }
 
 # Password validation
@@ -103,7 +104,7 @@ ALLOWED_HOSTS = ['*']
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -112,3 +113,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = '/dashboard'
 LOGOUT_REDIRECT_URL = '/'
+
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
