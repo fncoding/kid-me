@@ -12,4 +12,4 @@ else
 fi
 
 # Server starten
-exec gunicorn --bind 0.0.0.0:8000 kid_me.wsgi:application
+exec gunicorn --bind 0.0.0.0:8000 workspace.wsgi:application
