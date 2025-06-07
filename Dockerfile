@@ -12,4 +12,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY src/ .
 
 # Gunicorn starten
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "kid_me.wsgi:application"]
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "workspace.wsgi:application"]
