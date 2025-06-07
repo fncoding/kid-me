@@ -10,4 +10,5 @@ COPY . /app/
 # Wenn sich workspace im src-Ordner befindet:
 ENV PYTHONPATH=/app/src
 
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "workspace.wsgi:application"]
+
+CMD ["python", "manage.py", "makemigrations","&&", "gunicorn", "--bind", "0.0.0.0:8000", "workspace.wsgi:application"]
