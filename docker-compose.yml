@@ -14,7 +14,7 @@ services:
 
   web:
     build: .
-    command: gunicorn kid_me.wsgi:application --bind 0.0.0.0:8000
+    command: gunicorn workspace.wsgi:application --bind 0.0.0.0:8000
     environment:
       DATABASE_URL: postgres://django:django@db:5432/django_db
     volumes:
