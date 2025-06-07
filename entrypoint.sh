@@ -1,5 +1,7 @@
-#!/bin/bash
 set -e
+
+# Wechsel ins app-Verzeichnis (wo manage.py liegt, nachdem src/ . nach /app kopiert wurde)
+cd /app
 
 # Warte bis DB erreichbar ist (optional, wenn externe DB)
 if [ "$DATABASE_URL" ]; then
