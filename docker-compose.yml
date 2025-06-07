@@ -1,28 +1,18 @@
 version: '3.8'
 
 services:
-  db:
-    image: postgres:13
-    environment:
-      POSTGRES_DB: django_db
-      POSTGRES_USER: django
-      POSTGRES_PASSWORD: django
-    volumes:
-      - postgres_data:/var/lib/postgresql/data/
-    ports:
-      - "5432:5432"
-
   web:
     build: .
-    command: gunicorn workspace.wsgi:application --bind 0.0.0.0:8000
-    environment:
-      DATABASE_URL: postgres://django:django@db:5432/django_db
-    volumes:
-      - .:/app
+    container_name: kid-me-web
+    restart: unless-stopped
     ports:
-      - "8000:8000"
-    depends_on:
-      - db
-
-volumes:
-  postgres_data:
+      - "8000:8000" # Mappt Port 8000 des Containers auf Port 8000 des Hosts
+    environment:
+      # DATABASE_URL wird von deiner Render-Datenbank bereitgestellt
+      # Du kannst sie hier direkt eintragen oder besser über eine .env-Datei laden
+      # Beispiel: DATABASE_URL=postgres://user:pass@host:port/dbname
+      - DATABASE_URL=${DATABASE_URL}
+    # Optional: Wenn du während der Entwicklung Code-Änderungen live sehen willst,
+    # kannst du ein Volume für deinen Quellcode einbinden. Für Produktion ist das COPY im Dockerfile besser.
+    # volumes:
+    #   - ./src:/app
