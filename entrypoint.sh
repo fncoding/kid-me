@@ -1,3 +1,4 @@
+#!/bin/sh
 set -e
 
 # Wechsel ins app-Verzeichnis (wo manage.py liegt, nachdem src/ . nach /app kopiert wurde)
