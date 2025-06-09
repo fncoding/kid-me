@@ -36,7 +36,7 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./nginx/default.conf.template:/etc/nginx/templates/default.conf.template:ro
+      - ./nginx/default.conf:/etc/nginx/templates/default.conf:ro
       - static_volume:/app/staticfiles/:ro # Read-only für Nginx ist sicherer
       - media_volume:/app/mediafiles/:ro   # Read-only für Nginx ist sicherer
       - certbot_certs:/etc/letsencrypt/:ro
