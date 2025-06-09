@@ -6,29 +6,25 @@ services:
     container_name: kid_me_web_prod
     command: gunicorn workspace.wsgi:application --bind 0.0.0.0:8000
     volumes:
-      - static_volume:/app/staticfiles # For collectstatic output
-      - media_volume:/app/mediafiles    # For user-uploaded media
+      - static_volume:/app/staticfiles 
+      - media_volume:/app/mediafiles    
     expose:
       - 8000
     env_file:
-      - ./src/.env.prod # Load production environment variables
+      - ./src/.env.prod 
     depends_on:
       - db
     restart: unless-stopped
 
   db:
-    image: postgres:15
+    image: postgres:14
     container_name: kid_me_db_prod
     volumes:
       - postgres_data_prod:/var/lib/postgresql/data/
-    # For production, it's better to use IONOS managed database if possible.
-    # If using this container, ensure it's secured and backed up.
-    # Port exposure might not be needed if only 'web' accesses it,
-    # or secure it if client access is needed directly to this container.
     ports:
-      - "5433:5432" # Example: map to a different host port if needed for client access
+      - "5433:5432" 
     env_file:
-      - ./src/.env.prod # Load production database credentials
+      - ./src/.env.prod 
     restart: unless-stopped
 
 volumes:
