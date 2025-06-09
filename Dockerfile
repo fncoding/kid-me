@@ -1,20 +1,37 @@
-# Base Image mit Python 3.11 (ältere Versionen können Probleme machen auf Render)
-FROM python:3.11-slim
+# Stage 1: Build stage (optional, but good for managing dependencies)
+FROM python:3.11-slim as builder
 
-# Arbeitsverzeichnis setzen
 WORKDIR /app
 
-# Requirements installieren
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+# Install build dependencies for psycopg2 if needed (psycopg2-binary usually handles this)
+# RUN apt-get update && apt-get install -y --no-install-recommends gcc libpq-dev
 
-# Quellcode kopieren
-COPY src/ .
+COPY src/requirements.txt .
 
-# entrypoint.sh kopieren und ausführbar machen
-COPY entrypoint.sh /app/entrypoint.sh
-RUN chmod +x /app/entrypoint.sh
+# Create a virtual environment
+RUN python -m venv /opt/venv
+# Activate virtual environment and install requirements
+RUN . /opt/venv/bin/activate && pip install --no-cache-dir -r requirements.txt
 
+# Stage 2: Final stage
+FROM python:3.11-slim
 
-ENTRYPOINT ["/app/entrypoint.sh"]
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "workspace.wsgi:application"]
+WORKDIR /app
+
+# Copy the virtual environment from the builder stage
+COPY --from=builder /opt/venv /opt/venv
+
+# Activate the virtual environment
+ENV PATH="/opt/venv/bin:$PATH"
+
+# Set environment variables
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
+COPY ./src /app/
+
+# User for running the application (optional, but good practice)
+# RUN addgroup --system app && adduser --system --group app
+# USER app
+
+EXPOSE 8000
