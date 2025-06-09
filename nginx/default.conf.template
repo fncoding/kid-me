@@ -22,10 +22,7 @@ server {
     ssl_certificate /etc/letsencrypt/live/${DOMAIN_NAME}/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/${DOMAIN_NAME}/privkey.pem;
 
-    # Für verbesserte SSL-Sicherheit, nach erfolgreicher Certbot-Einrichtung wieder einkommentieren:
-    # include /etc/letsencrypt/options-ssl-nginx.conf;
-    # ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
-
+ 
     location /static/ {
         alias /app/staticfiles/; # Greift auf das Docker-Volume zu
     }
