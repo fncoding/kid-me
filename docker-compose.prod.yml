@@ -23,8 +23,8 @@ services:
     volumes:
       - postgres_data_prod:/var/lib/postgresql/data/
     # Port 5433:5432 ist für externen Zugriff, falls benötigt. Für interne Kommunikation nicht notwendig.
-    # ports:
-    #  - "5433:5432"
+    ports:
+      - "5433:5432"
     env_file:
       - ./src/.env.prod
     restart: unless-stopped

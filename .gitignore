@@ -1,5 +1,4 @@
 venv
-.env
-.env.prod
+
 docker-compose.dev.yml
 Docker.dev
