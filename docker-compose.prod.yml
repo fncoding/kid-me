@@ -4,10 +4,11 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: kid_me_web_prod
+    # Das Kommando wird aus dem Dockerfile oder hier definiert
     command: gunicorn workspace.wsgi:application --bind 0.0.0.0:8000
     volumes:
-      - static_volume:/app/staticfiles 
-      - media_volume:/app/mediafiles    
+      - static_volume:/app/staticfiles
+      - media_volume:/app/mediafiles
     expose:
       - 8000
     env_file:
@@ -21,13 +22,46 @@ services:
     container_name: kid_me_db_prod
     volumes:
       - postgres_data_prod:/var/lib/postgresql/data/
-    ports:
-      - "5433:5432" 
+    # Port 5433:5432 ist für externen Zugriff, falls benötigt. Für interne Kommunikation nicht notwendig.
+    # ports:
+    #  - "5433:5432"
     env_file:
-      - ./src/.env.prod 
+      - ./src/.env.prod
     restart: unless-stopped
+
+  nginx:
+    image: nginx:1.25-alpine # Eine spezifische Version ist oft besser als :latest
+    container_name: kid_me_nginx_prod
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/default.conf.template:/etc/nginx/templates/default.conf.template:ro
+      - static_volume:/app/staticfiles/:ro # Read-only für Nginx ist sicherer
+      - media_volume:/app/mediafiles/:ro   # Read-only für Nginx ist sicherer
+      - certbot_certs:/etc/letsencrypt/:ro
+      - certbot_www:/var/www/certbot/:ro # Nginx liest von hier, Certbot schreibt
+    environment:
+      - DOMAIN_NAME=${DOMAIN_NAME} # Wird aus der .env Datei im Root-Verzeichnis gelesen
+    command: /bin/sh -c "envsubst < /etc/nginx/templates/default.conf.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"
+    depends_on:
+      - web
+
+  certbot:
+    image: certbot/certbot
+    container_name: kid_me_certbot_prod
+    volumes:
+      - certbot_certs:/etc/letsencrypt/ # Certbot schreibt Zertifikate hierhin
+      - certbot_www:/var/www/certbot/   # Certbot schreibt Challenge-Files hierhin
+    environment: # Für 'docker-compose run certbot...'
+      - DOMAIN_NAME=${DOMAIN_NAME}
+      - CERTBOT_EMAIL=${CERTBOT_EMAIL}
+    # Das eigentliche Kommando wird manuell mit 'docker-compose -f docker-compose.prod.yml run --rm certbot [BEFEHL]' ausgeführt
 
 volumes:
   postgres_data_prod:
   static_volume:
   media_volume:
+  certbot_certs:
+  certbot_www:

@@ -1,5 +1,5 @@
 upstream kid_me_app {
-    server 127.0.0.1:8000; # Nginx auf dem Host verbindet sich mit der Web-App auf Port 8000 des Hosts
+    server web:8000; # Nginx verbindet sich mit dem 'web' Service auf Port 8000 im Docker-Netzwerk
 }
 
 server {
