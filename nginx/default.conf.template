@@ -1,23 +1,23 @@
 upstream kid_me_app {
-    server web:8000;
+    server 127.0.0.1:8000; # Nginx auf dem Host verbindet sich mit der Web-App auf Port 8000 des Hosts
 }
 
 server {
     listen 80;
-    server_name ${DOMAIN_NAME} www.${DOMAIN_NAME};
+    server_name ${DOMAIN_NAME} www.${DOMAIN_NAME}; # Wird zu felixneumann.me www.felixneumann.me
 
     location /.well-known/acme-challenge/ {
         root /var/www/certbot;
     }
 
     location / {
-        return 301 https://$host$request_uri;
+        return 301 https://$host$request_uri; # Leitet HTTP zu HTTPS um
     }
 }
 
 server {
     listen 443 ssl;
-    server_name ${DOMAIN_NAME} www.${DOMAIN_NAME};
+    server_name ${DOMAIN_NAME} www.${DOMAIN_NAME}; # Wird zu felixneumann.me www.felixneumann.me
 
     ssl_certificate /etc/letsencrypt/live/${DOMAIN_NAME}/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/${DOMAIN_NAME}/privkey.pem;
@@ -26,11 +26,11 @@ server {
     ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
 
     location /static/ {
-        alias /app/staticfiles/;
+        alias /app/staticfiles/; # Greift auf das Docker-Volume zu
     }
 
     location /media/ {
-        alias /app/mediafiles/;
+        alias /app/mediafiles/; # Greift auf das Docker-Volume zu
     }
 
     location / {
