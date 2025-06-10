@@ -1,0 +1,23 @@
+{% extends 'login/base.html' %}
+{% block title %}Profil bearbeiten{% endblock %}
+{% block content %}
+<h2>Profil bearbeiten</h2>
+<div class="row">
+    <div class="col-md-6">
+        <h4>Benutzername ändern</h4>
+        <form method="post">
+            {% csrf_token %}
+            {{ username_form.as_p }}
+            <button type="submit" name="username_submit" class="btn btn-success">Benutzername ändern</button>
+        </form>
+    </div>
+    <div class="col-md-6">
+        <h4>Passwort ändern</h4>
+        <form method="post">
+            {% csrf_token %}
+            {{ password_form.as_p }}
+            <button type="submit" name="password_submit" class="btn btn-success">Passwort ändern</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

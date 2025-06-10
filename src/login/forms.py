@@ -8,3 +8,8 @@ class NewUserForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'email')
+
+class UsernameChangeForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username']
