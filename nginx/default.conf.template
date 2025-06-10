@@ -1,11 +1,9 @@
 upstream kid_me_app {
-    server web:8000; # Nginx verbindet sich mit dem 'web' Service auf Port 8000 im Docker-Netzwerk
-}
+    server web:8000; 
 
 server {
     listen 80;
-    server_name ${DOMAIN_NAME} www.${DOMAIN_NAME}; # Wird zu felixneumann.me www.felixneumann.me
-
+    server_name ${DOMAIN_NAME} www.${DOMAIN_NAME}; 
     location /.well-known/acme-challenge/ {
         root /var/www/certbot;
     }
@@ -24,11 +22,11 @@ server {
 
  
     location /static/ {
-        alias /app/staticfiles/; # Greift auf das Docker-Volume zu
-    }
+        alias /app/staticfiles/; 
+        }
 
     location /media/ {
-        alias /app/mediafiles/; # Greift auf das Docker-Volume zu
+        alias /app/mediafiles/; 
     }
 
     location / {
