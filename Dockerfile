@@ -11,7 +11,7 @@ COPY src/requirements.txt .
 # Create a virtual environment
 RUN python -m venv /opt/venv
 # Activate virtual environment and install requirements
-RUN . /opt/venv/bin/activate && pip install --no-cache-dir -r requirements.txt
+RUN . /opt/venv/bin/activate && pip install --no-cache-dir -r requirements.txt 
 
 # Stage 2: Final stage
 FROM python:3.11-slim
