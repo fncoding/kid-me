@@ -147,9 +147,9 @@ CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_DOMAIN = ".felixneumann.me"
 CSRF_COOKIE_DOMAIN = ".felixneumann.me"
 
-# set true for prod
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
+# uncomment for dev
+# SESSION_COOKIE_SECURE = False
+# CSRF_COOKIE_SECURE = False
 
 
 
