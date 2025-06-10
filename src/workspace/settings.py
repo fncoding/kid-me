@@ -132,3 +132,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = 'dashboard' # Nach Login zum Dashboard
 LOGOUT_REDIRECT_URL = 'home'    # Nach Logout zur Home-Seite
+
+# CSRF trusted origins für HTTPS (ab Django 4.0+ empfohlen)
+CSRF_TRUSTED_ORIGINS = [
+    "https://felixneumann.me",
+    "https://www.felixneumann.me"
+]
+
+# Sicherheit für Cookies (empfohlen für HTTPS)
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
