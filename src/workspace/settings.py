@@ -129,7 +129,6 @@ MEDIA_ROOT = BASE_DIR / 'mediafiles'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
 LOGIN_REDIRECT_URL = 'dashboard' # Nach Login zum Dashboard
 LOGOUT_REDIRECT_URL = 'home'    # Nach Logout zur Home-Seite
 
@@ -142,3 +141,8 @@ CSRF_TRUSTED_ORIGINS = [
 # Sicherheit für Cookies (empfohlen für HTTPS)
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
+
+SESSION_COOKIE_DOMAIN = ".felixneumann.me"
+CSRF_COOKIE_DOMAIN = ".felixneumann.me"
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
