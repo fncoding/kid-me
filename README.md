@@ -51,7 +51,7 @@ A quick guide to a dev version of my project to inspect the code :)
     docker-compose up --build
     ```
 
-4. **Apply Database Migrations**
+4. **[VERY IMPORTANT] Apply Database Migrations**
 
     Run database migrations inside the Docker container:
     ```sh
