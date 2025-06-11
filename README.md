@@ -1,6 +1,6 @@
-# Project Setup Guide
+# Getting Started
 
-This guide will help you set up and run the project locally using Docker and Python virtual environments.
+A quick guide to a dev version of my project to inspect the code :)
 
 ## Prerequisites
 
@@ -13,14 +13,20 @@ This guide will help you set up and run the project locally using Docker and Pyt
 
     Copy the example environment file to create your own configuration:
     ```sh
-    cp .env.example .env
+    cp src/.env.example src/.env.dev
     ```
 
 2. **Create Python Virtual Environment (Optional)**
 
     If you want to run the project locally (outside Docker), create a virtual environment:
+
+    windows:
     ```sh
     cd src && py -m venv venv
+    ```
+     linux:
+    ```sh
+    cd src && python3 -m venv venv
     ```
 
 3. **Build and Start Docker Containers**
@@ -46,14 +52,8 @@ This guide will help you set up and run the project locally using Docker and Pyt
 
 ## Notes
 
-- Make sure to configure your `.env` file with the appropriate settings for your environment.
-- For development, you can use the provided Docker setup to ensure consistency across different systems.
+- ...
+- ...
 
 ---
-cp .env.example .env
-cd src && py -m venv venv
-
-docker-compose up --build
-docker-compose exec web python manage.py migrate
-docker-compose exec web python manage.py createsuperuser # Falls du einen Admin-User brauchst
 
