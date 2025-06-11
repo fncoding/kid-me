@@ -28,8 +28,23 @@ A quick guide to a dev version of my project to inspect the code :)
     ```sh
     cd src && python3 -m venv venv
     ```
-
 3. **Build and Start Docker Containers**
+
+     on windows:
+    ```sh
+    .\venv\Scripts\activate
+    ```
+     on linux:
+    ```sh
+    source venv/bin/activate
+    ```
+    Install requirements
+    in (venv) :
+    ```sh
+    pip install -r requirements.txt
+    ```
+    
+4. **Build and Start Docker Containers**
 
     Build the Docker images and start the containers:
     ```sh
@@ -52,8 +67,7 @@ A quick guide to a dev version of my project to inspect the code :)
 
 ## Notes
 
-- ...
-- ...
+- settings.py for prod - check lines for comments
 
 ---
 
