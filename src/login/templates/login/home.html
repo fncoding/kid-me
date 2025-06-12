@@ -6,9 +6,13 @@
 <div class="text-center p-5 rounded-3 bg-body-tertiary">
     <h1 class="display-5 fw-bold">Willkommen</h1>
     <p class="fs-4">Dies ist die öffentliche Startseite. Melden Sie sich an oder registrieren Sie sich, um auf Ihr Dashboard zuzugreifen.</p>
-    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mt-4">
-        <a href="{% url 'login' %}" class="btn btn-primary btn-lg px-4 gap-3">Login</a>
-        <a href="{% url 'register' %}" class="btn btn-outline-secondary btn-lg px-4">Registrieren</a>
+    <div class="row justify-content-center mt-4">
+        <div class="col-12 col-sm-auto mb-2 mb-sm-0">
+            <a href="{% url 'login' %}" class="btn btn-success btn-lg w-100" style="color: var(--bs-btn-color); background-color: var(--bs-btn-bg);">Login</a>
+        </div>
+        <div class="col-12 col-sm-auto">
+            <a href="{% url 'register' %}" class="btn btn-outline-secondary btn-lg w-100">Registrieren</a>
+        </div>
     </div>
 </div>
 {% endblock %}

@@ -1,0 +1,221 @@
+// --- Basisvariablen ---
+$purple-accent: #7F5AF0; // Ein lebendiges Lila
+$purple-dark: #6A0DAD;   // Ein tieferes Lila
+$dark-bg: #16161a;       // Sehr dunkler Hintergrund
+$dark-surface: #242629; // Etwas hellere Oberfläche für Karten etc.
+$dark-text: #fffffe;     // Heller Text für Dark Mode
+$dark-border: #404040;   // Randfarbe im Dark Mode
+$glow-color: rgba($purple-accent, 0.6);
+
+// --- Bootstrap Variablen Overrides (Beispiel für Dark Mode) ---
+// Diese Variablen werden wir später im Dark Mode Kontext setzen.
+// Zuerst definieren wir sie, damit wir sie wiederverwenden können.
+
+$bs-primary-dark: $purple-accent;
+$bs-body-bg-dark: $dark-bg;
+$bs-body-color-dark: $dark-text;
+$bs-border-color-dark: $dark-border;
+$bs-emphasis-color-rgb-dark: 255,255,254; // für text-emphasis-* Klassen
+
+// --- Light Mode (Standard Bootstrap oder eigene Anpassungen) ---
+// Hier könntest du auch Bootstrap-Variablen für den Light Mode anpassen,
+// falls gewünscht, oder die Standardwerte von Bootstrap beibehalten.
+// Beispiel:
+// :root {
+//   --bs-primary: $purple-dark; // Lila Akzent auch im Light Mode
+// }
+
+body {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+// c:\Users\fneumann\Desktop\key test\kid-me\src\assets\scss\custom-theme.scss
+// (Fortsetzung)
+
+// --- Dark Mode Stile ---
+[data-bs-theme="dark"] {
+  --bs-primary: #{$bs-primary-dark};
+  --bs-secondary: #{$purple-dark}; // Beispiel: Sekundäre Farbe
+  --bs-body-bg: #{$bs-body-bg-dark};
+  --bs-body-color: #{$bs-body-color-dark};
+  --bs-border-color: #{$bs-border-color-dark};
+  --bs-emphasis-color-rgb: #{$bs-emphasis-color-rgb-dark};
+
+  // Weitere Bootstrap-Komponenten anpassen
+  .navbar {
+    --bs-navbar-color: rgba(255, 255, 254, 0.75);
+    --bs-navbar-hover-color: #{$purple-accent};
+    --bs-navbar-active-color: #{$purple-accent};
+    --bs-navbar-brand-color: #{$purple-accent};
+    --bs-navbar-toggler-border-color: rgba(255, 255, 254, 0.2);
+  }
+
+  .card {
+    background-color: $dark-surface;
+    border-color: $dark-border;
+  }
+
+  .btn-primary {
+    --bs-btn-bg: #{$purple-accent};
+    --bs-btn-color: #{$dark-text}; 
+    --bs-btn-border-color: #{$purple-accent};
+    --bs-btn-hover-bg: #{darken($purple-accent, 10%)};
+    --bs-btn-hover-color: #{$dark-text};
+    --bs-btn-hover-border-color: #{darken($purple-accent, 10%)};
+    --bs-btn-active-bg: #{darken($purple-accent, 15%)};
+    --bs-btn-active-color: #{$dark-text};
+    --bs-btn-active-border-color: #{darken($purple-accent, 15%)};
+    --bs-btn-focus-shadow-rgb: #{red($purple-accent)}, #{green($purple-accent)}, #{blue($purple-accent)};
+  }
+
+  // Styling für sekundäre Buttons (z.B. Registrieren, falls es .btn-secondary ist)
+  .btn-secondary {
+    --bs-btn-bg: #{lighten($dark-surface, 5%)};
+    --bs-btn-color: #{$purple-accent};
+    --bs-btn-border-color: #{$purple-accent};
+    --bs-btn-hover-bg: #{$dark-text}; // Hintergrund weiß beim Hover
+    --bs-btn-hover-color: #{$purple-accent}; // Schrift lila beim Hover
+    --bs-btn-hover-border-color: #{$purple-accent};
+    --bs-btn-active-bg: #{lighten($dark-text, 5%)}; // Aktiver Zustand ggf. auch anpassen
+    --bs-btn-active-color: #{$purple-accent};
+    --bs-btn-active-border-color: #{$purple-accent};
+    --bs-btn-focus-shadow-rgb: #{red($purple-accent)}, #{green($purple-accent)}, #{blue($purple-accent)};
+  }
+
+  // Styling für Success Buttons (z.B. Registrieren auf der register.html)
+  .btn-success {
+    --bs-btn-bg: #{$purple-accent}; // Basis: Lila Hintergrund
+    --bs-btn-color: #{$dark-text};  // Heller Text für Lesbarkeit
+    --bs-btn-border-color: #{$purple-accent};
+    --bs-btn-hover-bg: #{$dark-text};
+    --bs-btn-hover-color: #{$purple-accent};
+    --bs-btn-hover-border-color: #{$purple-accent};
+    --bs-btn-active-bg: #{darken($dark-text, 5%)};
+    --bs-btn-active-color: #{$purple-accent};
+    --bs-btn-active-border-color: #{$purple-accent};
+    --bs-btn-focus-shadow-rgb: #{red($purple-accent)}, #{green($purple-accent)}, #{blue($purple-accent)};
+  }
+
+  .form-control, .form-select {
+    background-color: $dark-surface;
+    color: $dark-text;
+    border-color: $dark-border;
+    &:focus {
+      background-color: $dark-surface;
+      color: $dark-text;
+      border-color: $purple-accent;
+      box-shadow: 0 0 0 0.25rem rgba($purple-accent, 0.3);
+    }
+  }
+
+  // Links
+  a {
+    color: $purple-accent; // Standard Linkfarbe
+    &:hover {
+      color: lighten($purple-accent, 10%);
+    }
+  }
+}
+
+// Standardmäßig den Dark Mode aktivieren oder per JavaScript-Toggle
+// Für einen permanenten Dark Mode (oder wenn du es per JS steuerst):
+// html {
+//   @extend [data-bs-theme="dark"]; // SCSS extend
+// }
+// Oder setze das Attribut direkt im HTML: <html data-bs-theme="dark">
+
+// Für einen automatischen Dark Mode basierend auf Systemeinstellungen:
+// @media (prefers-color-scheme: dark) {
+//   :root { // Oder html, body
+//     --bs-primary: #{$bs-primary-dark};
+//     --bs-secondary: #{$purple-dark};
+//     --bs-body-bg: #{$bs-body-bg-dark};
+//     --bs-body-color: #{$bs-body-color-dark};
+//     --bs-border-color: #{$bs-border-color-dark};
+//     --bs-emphasis-color-rgb: #{$bs-emphasis-color-rgb-dark};
+//     // ... und weitere Anpassungen wie oben im [data-bs-theme="dark"] Block
+//   }
+// }
+// c:\Users\fneumann\Desktop\key test\kid-me\src\assets\scss\custom-theme.scss
+// (Fortsetzung)
+
+.glowing-element {
+  transition: box-shadow 0.3s ease-in-out;
+  &:hover {
+    box-shadow: 0 0 15px 5px $glow-color, 0 0 30px 10px rgba($purple-accent, 0.3);
+  }
+}
+
+.glowing-button {
+  @extend .glowing-element; // Erbt den Hover-Glow
+  // Kann auch einen permanenten leichten Glow haben
+  // box-shadow: 0 0 8px 2px rgba($purple-accent, 0.4);
+}
+
+.text-glow {
+  [data-bs-theme="dark"] & { // Nur im Dark Mode, oder anpassen
+    text-shadow: 0 0 8px $purple-accent, 0 0 12px rgba($purple-accent, 0.7);
+  }
+}
+
+// Glow für fokussierte Elemente (z.B. Inputs)
+[data-bs-theme="dark"] {
+  .form-control:focus, .btn:focus {
+    // Glow für .btn-primary und .btn-secondary beibehalten, andere Buttons evtl. dezenter
+    &.btn-primary, &.btn-secondary {
+      box-shadow: 0 0 0 0.2rem rgba($purple-accent, 0.25), 0 0 15px rgba($purple-accent, 0.4);
+    }
+  }
+}
+
+// c:\Users\fneumann\Desktop\key test\kid-me\src\assets\scss\custom-theme.scss
+// (Fortsetzung)
+
+// Allgemeine Übergänge für Links und Buttons
+a, .btn {
+  transition: color 0.2s ease-in-out, // Behalte individuelle Transitions
+              background-color 0.2s ease-in-out, // für bessere Kontrolle
+              border-color 0.2s ease-in-out, // und Performance
+              transform 0.2s ease-in-out, // als eine generische "all" Transition
+              box-shadow 0.2s ease-in-out; //
+}
+
+// Beispiel für Navigationslinks
+.navbar-nav .nav-link {
+  position: relative; // Für Pseudo-Elemente
+  padding-bottom: 0.5rem; // Platz für Underline
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%; // Start in der Mitte für zentrierten Effekt
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background-color: $purple-accent;
+    transition: width 0.3s ease-in-out;
+  }
+
+  &:hover::after,
+  &.active::after {
+    width: 80%; // Oder 100%
+  }
+
+  &:hover, &.active {
+    color: $purple-accent; // Im Light Mode, im Dark Mode ist es schon so
+  }
+}
+
+// Karten-Hover-Effekt
+.card-hover-effect {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  &:hover {
+    transform: translateY(-5px) scale(1.02);
+    [data-bs-theme="dark"] & {
+      box-shadow: 0 10px 20px rgba($dark-bg, 0.5), 0 0 20px $glow-color;
+    }
+    [data-bs-theme="light"] & { // Optional: Light Mode Hover
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1), 0 0 15px rgba($purple-accent, 0.3);
+    }
+  }
+}

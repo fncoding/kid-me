@@ -1,2 +1,15 @@
 @use "../../node_modules/bootstrap/scss/bootstrap";
 @use "theme";
+// c:\Users\fneumann\Desktop\key test\kid-me\src\assets\scss\custom-theme.scss
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Orbitron:wght@700&display=swap');
+
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, .navbar-brand {
+  font-family: 'Orbitron', sans-serif; // Eine futuristische Schrift für Akzente
+  // oder eine andere serifenlose Schrift für Überschriften
+  // font-family: 'Inter', sans-serif;
+  // font-weight: 700;
+}
