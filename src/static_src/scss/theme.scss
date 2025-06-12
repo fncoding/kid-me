@@ -1,0 +1,122 @@
+// 1. Bootstrap-Variablen überschreiben
+$body-bg: #181828;
+$body-color: #e0e0f0;
+$primary: #a259ff;
+$secondary: #23233a;
+$success: #4ade80;
+$danger: #f87171;
+$info: #38bdf8;
+$warning: #facc15;
+$light: #23233a;
+$dark: #0f0f1a;
+
+$border-radius: 0.7rem;
+$input-bg: #23233a;
+$input-color: #e0e0f0;
+$input-border-color: #3a3a5a;
+$input-focus-border-color: $primary;
+$input-placeholder-color: #8888aa;
+
+$navbar-bg: #181828;
+$navbar-dark-color: #e0e0f0;
+$navbar-dark-hover-color: $primary;
+
+$link-color: $primary;
+$link-hover-color: lighten($primary, 10%);
+
+$btn-border-radius: 0.5rem;
+$btn-font-weight: 600;
+$btn-outline-primary-color: $primary;
+$btn-outline-primary-border: $primary;
+$btn-outline-primary-hover-bg: $primary;
+$btn-outline-primary-hover-color: #fff;
+
+// 2. Bootstrap importieren
+@import "../../node_modules/bootstrap/scss/bootstrap";
+
+// 3. Eigene Komponenten und Utility-Klassen
+body {
+  background: $body-bg;
+  color: $body-color;
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  letter-spacing: 0.01em;
+}
+
+a {
+  color: $primary;
+  text-decoration: underline;
+  &:hover {
+    color: lighten($primary, 10%);
+    text-decoration: none;
+  }
+}
+
+.btn-outline-primary {
+  border-color: $primary;
+  color: $primary;
+  background: transparent;
+  &:hover, &:focus {
+    background: $primary;
+    color: #fff;
+    border-color: $primary;
+    box-shadow: 0 0 0 0.2rem rgba($primary, 0.2);
+  }
+}
+
+.card, .modal-content, .dropdown-menu, .form-control, .input-group-text {
+  background: $secondary;
+  color: $body-color;
+  border-radius: $border-radius;
+  border: 1px solid #28284a;
+}
+
+.form-label, label {
+  color: $primary;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+input, select, textarea {
+  background: $input-bg;
+  color: $input-color;
+  border: 1px solid $input-border-color;
+  border-radius: $border-radius;
+  &::placeholder {
+    color: $input-placeholder-color;
+    opacity: 1;
+  }
+  &:focus {
+    border-color: $input-focus-border-color;
+    box-shadow: 0 0 0 0.2rem rgba($primary, 0.15);
+    background: darken($input-bg, 2%);
+  }
+}
+
+// 4. Benutzer-Editierseite stabilisieren
+.user-edit-form {
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 2rem 2.5rem;
+  background: $secondary;
+  border-radius: $border-radius;
+  box-shadow: 0 4px 32px 0 rgba(80, 60, 120, 0.15);
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+  .form-label {
+    margin-bottom: 0.5rem;
+  }
+  .btn {
+    width: 100%;
+    margin-top: 1rem;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  background: $secondary;
+}
+::-webkit-scrollbar-thumb {
+  background: $primary;
+  border-radius: 4px;
+}
