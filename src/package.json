@@ -1,0 +1,24 @@
+{
+  "name": "src",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build-css": "sass --load-path=node_modules static_src/scss/main.scss assets/css/main.css",
+    "watch-css": "sass --watch --load-path=node_modules static_src/scss/main.scss:assets/css/main.css",
+    "copy-bootstrap-js:win": "mkdir assets\\js 2>nul & copy node_modules\\bootstrap\\dist\\js\\bootstrap.bundle.min.js assets\\js\\",
+    "copy-bootstrap-icons:win": "mkdir assets\\bootstrap-icons 2>nul & xcopy /E /I /Y node_modules\\bootstrap-icons\\font assets\\bootstrap-icons\\font\\",
+    "copy-bootstrap-js:linux": "mkdir -p assets/js && cp node_modules/bootstrap/dist/js/bootstrap.bundle.min.js assets/js/",
+    "copy-bootstrap-icons:linux": "mkdir -p assets/bootstrap-icons/font && cp -r node_modules/bootstrap-icons/font/* assets/bootstrap-icons/font/",
+    "build-static:win": "npm run build-css && npm run copy-bootstrap-js:win && npm run copy-bootstrap-icons:win",
+    "build-static:linux": "npm run build-css && npm run copy-bootstrap-js:linux && npm run copy-bootstrap-icons:linux"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "bootstrap": "^5.3.6",
+    "bootstrap-icons": "^1.11.3",
+    "sass": "^1.89.2"
+  }
+}
