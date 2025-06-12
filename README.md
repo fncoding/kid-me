@@ -16,34 +16,46 @@ A quick guide to a dev version of my project to inspect the code :)
     cp src/.env.example src/.env.dev
     ```
 
-2. **Create Python Virtual Environment (Optional)**
+2. **Install Node Dependencies & Build Static Assets**
+
+    We use npm to build Bootstrap, Bootstrap Icons, and SCSS.  
+    Run these commands **before starting Docker**:
+
+    **On Windows:**
+    ```sh
+    cd src
+    npm install
+    npm run build-static:win
+    ```
+
+    **On Linux/macOS:**
+    ```sh
+    cd src
+    npm install
+    npm run build-static:linux
+    ```
+
+3. **Create Python Virtual Environment (Optional)**
 
     If you want to run the project locally (outside Docker), create a virtual environment:
 
-    windows:
+    **On Windows:**
     ```sh
     cd src && py -m venv venv
-    ```
-     linux:
-    ```sh
-    cd src && python3 -m venv venv
-    ```
-3. **Build and Start Docker Containers**
-
-     on windows:
-    ```sh
     .\venv\Scripts\activate
     ```
-     on linux:
+
+    **On Linux/macOS:**
     ```sh
+    cd src && python3 -m venv venv
     source venv/bin/activate
     ```
-    Install requirements
-    in (venv) :
+
+    Install requirements:
     ```sh
     pip install -r requirements.txt
     ```
-    
+
 4. **Build and Start Docker Containers**
 
     Build the Docker images and start the containers:
@@ -51,14 +63,21 @@ A quick guide to a dev version of my project to inspect the code :)
     docker-compose up --build
     ```
 
-4. **[VERY IMPORTANT] Apply Database Migrations**
+5. **[VERY IMPORTANT] Apply Database Migrations**
 
     Run database migrations inside the Docker container:
     ```sh
     docker-compose exec web python manage.py migrate
     ```
 
-5. **Create Superuser (Optional)**
+6. **Collect Static Files (for production or after static changes)**
+
+    If you change static files or deploy, run:
+    ```sh
+    docker-compose exec web python manage.py collectstatic --noinput
+    ```
+
+7. **Create Superuser (Optional)**
 
     If you need an admin user, create a superuser:
     ```sh
@@ -67,7 +86,9 @@ A quick guide to a dev version of my project to inspect the code :)
 
 ## Notes
 
-- settings.py for prod - check lines for comments
+- **Always run the npm static build before starting Docker** if you change frontend assets.
+- `settings.py` for prod - check lines for comments.
+- For local development with Docker, static files must exist in the correct folders before container start.
 
 ---
 

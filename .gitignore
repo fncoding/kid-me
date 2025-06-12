@@ -45,3 +45,18 @@ src/mediafiles/
 # System
 .DS_Store
 Thumbs.db
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+.pnpm-debug.log*
+dist/
+build/
+
+# Optional: temporäre Frontend-Builds
+src/static_src/css/
+src/static_src/js/
