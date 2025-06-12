@@ -1,15 +1,28 @@
 @use "../../node_modules/bootstrap/scss/bootstrap";
 @use "theme";
-// c:\Users\fneumann\Desktop\key test\kid-me\src\assets\scss\custom-theme.scss
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700&family=Orbitron:wght@700&display=swap');
+// Neue Schriftart importieren:
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Roboto', Arial, sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6, .navbar-brand {
-  font-family: 'Orbitron', sans-serif; // Eine futuristische Schrift für Akzente
-  // oder eine andere serifenlose Schrift für Überschriften
-  // font-family: 'Inter', sans-serif;
-  // font-weight: 700;
+  font-family: 'Roboto', Arial, sans-serif;
+}
+
+.navbar {
+  border-bottom: 1px solid var(--bs-border-color, #404040);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  .container {
+    border-bottom: none;
+  }
+}
+
+// Dropdown-Menü optisch aufräumen
+.dropdown-menu {
+  border-radius: 0.5rem;
+  margin-top: 0.5rem;
+  min-width: 180px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.15);
 }
