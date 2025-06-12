@@ -89,6 +89,16 @@ A quick guide to a dev version of my project to inspect the code :)
 - **Always run the npm static build before starting Docker** if you change frontend assets.
 - `settings.py` for prod - check lines for comments.
 - For local development with Docker, static files must exist in the correct folders before container start.
+scss changes prod with:
+   ```sh
+    npm run build-static:linux 
+    ```
+     ```sh
+    docker-compose -f docker-compose.prod.yml up --build -d 
+    ```
+    ```sh
+    docker-compose -f docker-compose.prod.yml exec web python manage.py collectstatic --noinput 
+    ```
 
 ---
 
