@@ -10,7 +10,10 @@
                     <h4 class="card-title">Benutzername ändern</h4>
                     <form method="post">
                         {% csrf_token %}
-                        {{ username_form.as_p }}
+                        <div class="mb-3">
+                            <label for="id_username" class="form-label">Neuer Benutzername</label>
+                            <input type="text" name="username" id="id_username" class="form-control" value="{{ username_form.username.value|default:user.username }}" required>
+                        </div>
                         <button type="submit" name="username_submit" class="btn btn-success w-100">Benutzername ändern</button>
                     </form>
                 </div>
@@ -24,7 +27,14 @@
                     <h4 class="card-title">Passwort ändern</h4>
                     <form method="post">
                         {% csrf_token %}
-                        {{ password_form.as_p }}
+                        <div class="mb-3">
+                            <label for="id_new_password1" class="form-label">Neues Passwort</label>
+                            <input type="password" name="new_password1" id="id_new_password1" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="id_new_password2" class="form-label">Passwort bestätigen</label>
+                            <input type="password" name="new_password2" id="id_new_password2" class="form-control" required>
+                        </div>
                         <button type="submit" name="password_submit" class="btn btn-success w-100">Passwort ändern</button>
                     </form>
                 </div>

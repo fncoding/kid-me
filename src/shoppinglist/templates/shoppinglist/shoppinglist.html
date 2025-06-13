@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block title %}Shopping List{% endblock %}
+{% block content %}
+<h2>Shopping List</h2>
+<form method="post" class="mb-3">
+    {% csrf_token %}
+    <div class="input-group">
+        <input type="text" name="name" class="form-control" placeholder="Neues Produkt" required>
+        <input type="number" name="quantity" class="form-control" value="1" min="1" style="max-width: 100px;">
+        <button type="submit" class="btn btn-success">Hinzufügen</button>
+    </div>
+</form>
+<ul class="list-group mb-4">
+    {% for item in items %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span>
+                <form method="post" action="{% url 'shoppinglist_toggle_purchased' item.id %}" style="display:inline;">
+                    {% csrf_token %}
+                    <input type="checkbox" onchange="this.form.submit()" {% if item.purchased %}checked{% endif %}>
+                </form>
+                {{ item.name }} ({{ item.quantity }})
+                {% if not item.purchased %}
+                    <span class="badge bg-warning">offen</span>
+                {% else %}
+                    <span class="badge bg-success">gekauft</span>
+                {% endif %}
+            </span>
+            <span>
+                <a href="{% url 'shoppinglist_edit' item.id %}" class="btn btn-sm btn-outline-primary me-1">✏️</a>
+                <a href="{% url 'shoppinglist_delete' item.id %}" class="btn btn-sm btn-outline-danger">🗑️</a>
+                <form method="post" action="{% url 'shoppinglist_move_to_inventory' item.id %}" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-sm btn-outline-success ms-1">➡️</button>
+                </form>
+            </span>
+        </li>
+    {% empty %}
+        <li class="list-group-item">Keine Einträge</li>
+    {% endfor %}
+</ul>
+<form method="post" action="{% url 'shoppinglist_move_all_to_inventory' %}" class="mb-2">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-success btn-sm">Alle in Bestand verschieben</button>
+</form>
+<h3 class="py-2">Bestandsliste</h3>
+<form method="post" action="{% url 'inventory_add' %}" class="mb-3">
+    {% csrf_token %}
+    <div class="input-group">
+        <input type="text" name="inv_name" class="form-control" placeholder="Neues Produkt" required>
+        <input type="number" name="inv_quantity" class="form-control" value="1" min="1" style="max-width: 100px;">
+        <button type="submit" class="btn btn-success">Hinzufügen</button>
+    </div>
+</form>
+<ul class="list-group">
+    {% for inv in inventory %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span>{{ inv.name }} ({{ inv.quantity }})</span>
+            <span>
+                <a href="{% url 'inventory_edit' inv.id %}" class="btn btn-sm btn-outline-primary me-1">✏️</a>
+                <a href="{% url 'inventory_delete' inv.id %}" class="btn btn-sm btn-outline-danger">🗑️</a>
+            </span>
+        </li>
+    {% empty %}
+        <li class="list-group-item">Keine Bestände</li>
+    {% endfor %}
+</ul>
+{% endblock %}

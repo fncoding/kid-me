@@ -22,5 +22,6 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')), # Für Login, Logout, Passwort-Reset etc.
-    path('', include('login.urls')), # Deine App URLs
+    path('', include('login.urls')), 
+    path('shoppinglist/', include('shoppinglist.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # Für Media-Dateien im Entwicklungsmodus

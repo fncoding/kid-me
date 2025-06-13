@@ -116,27 +116,7 @@ body {
   }
 }
 
-// Standardmäßig den Dark Mode aktivieren oder per JavaScript-Toggle
-// Für einen permanenten Dark Mode (oder wenn du es per JS steuerst):
-// html {
-//   @extend [data-bs-theme="dark"]; // SCSS extend
-// }
-// Oder setze das Attribut direkt im HTML: <html data-bs-theme="dark">
 
-// Für einen automatischen Dark Mode basierend auf Systemeinstellungen:
-// @media (prefers-color-scheme: dark) {
-//   :root { // Oder html, body
-//     --bs-primary: #{$bs-primary-dark};
-//     --bs-secondary: #{$purple-dark};
-//     --bs-body-bg: #{$bs-body-bg-dark};
-//     --bs-body-color: #{$bs-body-color-dark};
-//     --bs-border-color: #{$bs-border-color-dark};
-//     --bs-emphasis-color-rgb: #{$bs-emphasis-color-rgb-dark};
-//     // ... und weitere Anpassungen wie oben im [data-bs-theme="dark"] Block
-//   }
-// }
-// c:\Users\fneumann\Desktop\key test\kid-me\src\assets\scss\custom-theme.scss
-// (Fortsetzung)
 
 .glowing-element {
   transition: box-shadow 0.3s ease-in-out;
@@ -148,7 +128,7 @@ body {
 .glowing-button {
   @extend .glowing-element; // Erbt den Hover-Glow
   // Kann auch einen permanenten leichten Glow haben
-  // box-shadow: 0 0 8px 2px rgba($purple-accent, 0.4);
+  box-shadow: 0 0 8px 2px rgba($purple-accent, 0.4);
 }
 
 .text-glow {
@@ -167,8 +147,7 @@ body {
   }
 }
 
-// c:\Users\fneumann\Desktop\key test\kid-me\src\assets\scss\custom-theme.scss
-// (Fortsetzung)
+
 
 // Allgemeine Übergänge für Links und Buttons
 a, .btn {

@@ -102,5 +102,19 @@ A quick guide to a dev version of my project to inspect the code :)
     docker-compose exec web python manage.py collectstatic --noinput  
     ```
 
+## Datenbank-Migrationen bei Dockerized PostgreSQL
+
+**Wichtig:**  
+Wenn du Docker und PostgreSQL verwendest, müssen alle Django-Migrationen im laufenden Web-Container ausgeführt werden, damit sie gegen die richtige Datenbank laufen.
+
+Führe Migrationen so aus:
+
+```sh
+docker-compose exec web python manage.py migrate
+```
+
+Dadurch werden die Migrationen in der PostgreSQL-Datenbank im Container angewendet.  
+Lokale Migrationen (z.B. mit SQLite) haben keinen Effekt auf die Container-Datenbank.
+
 ---
 
