@@ -111,6 +111,7 @@ Führe Migrationen so aus:
 
 ```sh
 docker-compose exec web python manage.py migrate
+docker-compose -f docker-compose.prod.yml exec web python manage.py migrate 
 ```
 
 Dadurch werden die Migrationen in der PostgreSQL-Datenbank im Container angewendet.  
