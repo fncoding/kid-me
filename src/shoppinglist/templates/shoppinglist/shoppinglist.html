@@ -43,13 +43,13 @@
 </ul>
 <form method="post" action="{% url 'shoppinglist_move_all_to_inventory' %}" class="mb-2">
     {% csrf_token %}
-    {% include 'components/separator.html' %}
+    
     <div class="d-flex justify-content-center align-items-center my-2">
         <i class="bi bi-chevron-double-down animated-arrow me-2"></i>
         <button type="submit" class="btn btn-success btn-sm">Alle in Bestand</button>
         <i class="bi bi-chevron-double-down animated-arrow ms-2"></i>
     </div>
-    {% include 'components/separator.html' %}
+   
 </form>
 <h3 class="py-2">Bestandsliste</h3>
 {% include 'components/separator.html' %}
