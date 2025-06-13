@@ -217,6 +217,18 @@ a, .btn {
   }
 }
 
+.navbar-username {
+  &::after {
+    display: none !important; // Underline-Animation ausblenden
+  }
+  i.bi-chevron-down {
+    transition: transform 0.2s;
+  }
+}
+.show > .navbar-username i.bi-chevron-down {
+  transform: rotate(180deg); // Dreieck zeigt nach oben, wenn offen
+}
+
 /* src/assets/css/main.css */
 .sticky-footer {
   position: fixed;
@@ -234,5 +246,5 @@ a, .btn {
 }
 
 .list-group-item {
-  border-color: $purple-dark;
+  border-color: $purple-accent;
 }

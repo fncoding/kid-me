@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block title %}Shopping List{% endblock %}
 {% block content %}
-<h2>Shopping List</h2>
+<h2 class="text-center">Shopping List</h2>
 <div style="height: 4px; width: 100%; background: linear-gradient(to right, #7F5AF0, #0099ff); border-radius: 2px; margin: 2rem 0;"></div>
 <form method="post" class="mb-3">
     {% csrf_token %}
@@ -52,7 +52,7 @@
    
 </form>
 {% include 'components/separator.html' %}
-<h3 class="py-2">Bestandsliste</h3>
+<h3 class="text-center py-2">Bestandsliste</h3>
 {% include 'components/separator.html' %}
 <form method="post" action="{% url 'inventory_add' %}" class="mb-3">
     {% csrf_token %}

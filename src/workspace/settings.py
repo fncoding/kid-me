@@ -143,14 +143,14 @@ CSRF_TRUSTED_ORIGINS = [origin.strip() for origin in CSRF_TRUSTED_ORIGINS_STRING
 
 
 # decomment for prods
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_DOMAIN = ".felixneumann.me"
-CSRF_COOKIE_DOMAIN = ".felixneumann.me"
+# SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
+# SESSION_COOKIE_DOMAIN = ".felixneumann.me"
+# CSRF_COOKIE_DOMAIN = ".felixneumann.me"
 
 # uncomment for dev
-# SESSION_COOKIE_SECURE = False
-# CSRF_COOKIE_SECURE = False
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False
 
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
