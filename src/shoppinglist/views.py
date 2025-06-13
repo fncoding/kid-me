@@ -91,3 +91,19 @@ def inventory_delete(request, item_id):
         item.delete()
         return redirect('shoppinglist')
     return render(request, "shoppinglist/inventory_delete.html", {"item": item})
+
+@login_required
+def inventory_move_to_shoppinglist(request, inv_id):
+    if request.method == "POST":
+        inv = get_object_or_404(InventoryItem, id=inv_id, user=request.user)
+        # Prüfen, ob das Item schon auf der Shoppinglist ist
+        sli, created = ShoppingListItem.objects.get_or_create(
+            user=request.user,
+            name=inv.name,
+            defaults={'quantity': inv.quantity}
+        )
+        if not created:
+            sli.quantity += inv.quantity
+            sli.save()
+        inv.delete()
+    return redirect('shoppinglist')

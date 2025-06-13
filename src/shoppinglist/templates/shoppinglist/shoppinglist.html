@@ -2,6 +2,7 @@
 {% block title %}Shopping List{% endblock %}
 {% block content %}
 <h2>Shopping List</h2>
+<div style="height: 4px; width: 100%; background: linear-gradient(to right, #7F5AF0, #0099ff); border-radius: 2px; margin: 2rem 0;"></div>
 <form method="post" class="mb-3">
     {% csrf_token %}
     <div class="input-group">
@@ -12,7 +13,7 @@
 </form>
 <ul class="list-group mb-4">
     {% for item in items %}
-        <li class="list-group-item d-flex justify-content-between align-items-center">
+        <li class="list-group-item d-flex justify-content-between">
             <span>
                 <form method="post" action="{% url 'shoppinglist_toggle_purchased' item.id %}" style="display:inline;">
                     {% csrf_token %}
@@ -30,7 +31,9 @@
                 <a href="{% url 'shoppinglist_delete' item.id %}" class="btn btn-sm btn-outline-danger">🗑️</a>
                 <form method="post" action="{% url 'shoppinglist_move_to_inventory' item.id %}" style="display:inline;">
                     {% csrf_token %}
-                    <button type="submit" class="btn btn-sm btn-outline-success ms-1">➡️</button>
+                    <button type="submit" class="btn btn-sm btn-outline-success ms-1">
+                        <i class="bi bi-arrow-down"></i>
+                    </button>
                 </form>
             </span>
         </li>
@@ -40,9 +43,16 @@
 </ul>
 <form method="post" action="{% url 'shoppinglist_move_all_to_inventory' %}" class="mb-2">
     {% csrf_token %}
-    <button type="submit" class="btn btn-success btn-sm">Alle in Bestand verschieben</button>
+    {% include 'components/separator.html' %}
+    <div class="d-flex justify-content-center align-items-center my-2">
+        <i class="bi bi-chevron-double-down animated-arrow me-2"></i>
+        <button type="submit" class="btn btn-success btn-sm">Alle in Bestand</button>
+        <i class="bi bi-chevron-double-down animated-arrow ms-2"></i>
+    </div>
+    {% include 'components/separator.html' %}
 </form>
 <h3 class="py-2">Bestandsliste</h3>
+{% include 'components/separator.html' %}
 <form method="post" action="{% url 'inventory_add' %}" class="mb-3">
     {% csrf_token %}
     <div class="input-group">
@@ -58,10 +68,17 @@
             <span>
                 <a href="{% url 'inventory_edit' inv.id %}" class="btn btn-sm btn-outline-primary me-1">✏️</a>
                 <a href="{% url 'inventory_delete' inv.id %}" class="btn btn-sm btn-outline-danger">🗑️</a>
+                <form method="post" action="{% url 'inventory_move_to_shoppinglist' inv.id %}" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-sm btn-outline-warning ms-1">
+                        <i class="bi bi-arrow-up"></i>
+                    </button>
+                </form>
             </span>
         </li>
     {% empty %}
         <li class="list-group-item">Keine Bestände</li>
     {% endfor %}
+    {% include 'components/separator.html' %}
 </ul>
 {% endblock %}

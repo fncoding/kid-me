@@ -1,10 +1,11 @@
 from django.contrib.auth import views as auth_views
-from django.urls import path
+from django.urls import path, include
 from . import views
 from .views import profile_edit_view, activate_view
 
 urlpatterns = [
     path('', views.home_view, name='home'),
+    path('contact/', views.contact, name='contact'), 
     path('dashboard/', views.dashboard_view, name='dashboard'),
     path('register/', views.register_view, name='register'),
     path('password_change/', auth_views.PasswordChangeView.as_view(

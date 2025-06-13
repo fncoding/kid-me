@@ -12,41 +12,7 @@
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-body-tertiary mb-4">
-        <div class="container">
-            <a class="navbar-brand" href="{% url 'dashboard' %}">felixneumann.me</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="bi bi-list" style="font-size: 2rem;"></i>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <div class="navbar-nav ms-auto">
-                    {% if user.is_authenticated %}
-                        <a class="nav-link" href="{% url 'shoppinglist' %}">Shopping List</a>
-                        <div class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                {{ user.username }}
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                                <li>
-                                    <a class="dropdown-item" href="{% url 'profile_edit' %}">Profil bearbeiten</a>
-                                </li>
-                                <li>
-                                    <form method="post" action="{% url 'logout' %}" style="margin: 0;">
-                                        {% csrf_token %}
-                                        <button type="submit" class="dropdown-item">Logout</button>
-                                    </form>
-                                </li>
-                            </ul>
-                        </div>
-                    {% else %}
-                        <a class="nav-link" href="{% url 'login' %}">Login</a>
-                        <a class="nav-link" href="{% url 'register' %}">Register</a>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-    </nav>
-
+    {% include 'components/navbar.html' %}
     <main class="container">
         {% if messages %}
             {% for message in messages %}
@@ -64,7 +30,8 @@
             </div>
         </div>
     </main>
-
+    <div style="height: 70px;"></div>
+    {% include 'components/footer.html' %}
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
     <script>
     function togglePassword(inputId, iconSpan) {

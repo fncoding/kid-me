@@ -1,0 +1,25 @@
+<footer class="sticky-footer">
+  <div class="container py-2">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+      <div>
+        &copy; 2025 felixneumann.me
+        &nbsp;|&nbsp;
+        <a href="https://github.com/fncoding" target="_blank" rel="noopener" class="text-decoration-none text-glow">
+          <i class="bi bi-github"></i> GitHub
+        </a>
+        &nbsp;|&nbsp;
+        <a href="mailto:admin@felixneumann.me" class="text-decoration-none text-glow">
+          <i class="bi bi-envelope"></i> E-Mail
+        </a>
+      </div>
+     
+      <form action="{% url 'contact' %}" method="post" class="d-flex gap-2 align-items-center" style="max-width: 350px;">
+        {% csrf_token %}
+        <i class="bi bi-envelope"></i>:
+        <input type="email" name="email" class="form-control form-control-sm" placeholder="Deine E-Mail" required>
+        <input type="text" name="message" class="form-control form-control-sm" placeholder="Nachricht" required>
+        <button type="submit" class="btn btn-primary btn-sm">Senden</button>
+      </form>
+    </div>
+  </div>
+</footer>

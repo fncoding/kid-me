@@ -104,3 +104,21 @@ def activate_view(request, uidb64, token):
     else:
         messages.error(request, 'Activation link is invalid!')
         return redirect('home')
+
+def contact(request):
+    if request.method == "POST":
+        email = request.POST.get("email")
+        message = request.POST.get("message")
+        if email and message:
+            # Beispiel: E-Mail an dich selbst senden
+            send_mail(
+                subject=f"Kontaktformular von {email}",
+                message=message,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[settings.DEFAULT_FROM_EMAIL],
+                fail_silently=True,
+            )
+            messages.success(request, "Danke für deine Nachricht!")
+        else:
+            messages.error(request, "Bitte alle Felder ausfüllen.")
+        return redirect(request.META.get("HTTP_REFERER", "/"))

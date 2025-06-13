@@ -11,4 +11,5 @@ urlpatterns = [
     path('inventory_add/', views.inventory_add, name='inventory_add'),
     path('inventory_edit/<int:item_id>/', views.inventory_edit, name='inventory_edit'),
     path('inventory_delete/<int:item_id>/', views.inventory_delete, name='inventory_delete'),
+    path('inventory/<int:inv_id>/move_to_shoppinglist/', views.inventory_move_to_shoppinglist, name='inventory_move_to_shoppinglist'),
 ]
