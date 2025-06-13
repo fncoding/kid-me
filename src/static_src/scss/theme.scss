@@ -1,15 +1,12 @@
-// --- Basisvariablen ---
-$purple-accent: #7F5AF0; // Ein lebendiges Lila
-$purple-dark: #6A0DAD;   // Ein tieferes Lila
-$dark-bg: #16161a;       // Sehr dunkler Hintergrund
-$dark-surface: #242629; // Etwas hellere Oberfläche für Karten etc.
-$dark-text: #fffffe;     // Heller Text für Dark Mode
-$dark-border: #404040;   // Randfarbe im Dark Mode
+$purple-accent: #7F5AF0; 
+$purple-dark: #6A0DAD;   
+$dark-bg: #16161a;       
+$dark-surface: #242629; 
+$dark-text: #fffffe;     
+$dark-border: #404040;   
 $glow-color: rgba($purple-accent, 0.6);
 
-// --- Bootstrap Variablen Overrides (Beispiel für Dark Mode) ---
-// Diese Variablen werden wir später im Dark Mode Kontext setzen.
-// Zuerst definieren wir sie, damit wir sie wiederverwenden können.
+
 
 $bs-primary-dark: $purple-accent;
 $bs-body-bg-dark: $dark-bg;
@@ -28,8 +25,6 @@ $bs-emphasis-color-rgb-dark: 255,255,254; // für text-emphasis-* Klassen
 body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
-// c:\Users\fneumann\Desktop\key test\kid-me\src\assets\scss\custom-theme.scss
-// (Fortsetzung)
 
 // --- Dark Mode Stile ---
 [data-bs-theme="dark"] {
@@ -160,14 +155,14 @@ a, .btn {
 
 // Beispiel für Navigationslinks
 .navbar-nav .nav-link {
-  position: relative; // Für Pseudo-Elemente
-  padding-bottom: 0.5rem; // Platz für Underline
+  position: relative;
+  padding-bottom: 0.5rem;
 
   &::after {
     content: '';
     position: absolute;
     bottom: 0;
-    left: 50%; // Start in der Mitte für zentrierten Effekt
+    left: 50%;
     transform: translateX(-50%);
     width: 0;
     height: 2px;
@@ -177,11 +172,7 @@ a, .btn {
 
   &:hover::after,
   &.active::after {
-    width: 80%; // Oder 100%
-  }
-
-  &:hover, &.active {
-    color: $purple-accent; // Im Light Mode, im Dark Mode ist es schon so
+    width: 80%;
   }
 }
 
@@ -196,5 +187,13 @@ a, .btn {
     [data-bs-theme="light"] & { // Optional: Light Mode Hover
         box-shadow: 0 10px 20px rgba(0,0,0,0.1), 0 0 15px rgba($purple-accent, 0.3);
     }
+  }
+}
+
+// Underline-Animation der Navbar-Links nur auf Desktop anzeigen
+@media (max-width: 991.98px) {
+  .navbar-nav .nav-link::after {
+    display: none !important;
+    content: none !important;
   }
 }
