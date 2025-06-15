@@ -23,5 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('django.contrib.auth.urls')), # Für Login, Logout, Passwort-Reset etc.
     path('', include('login.urls')), 
+    path('', include('contact.urls')),
     path('shoppinglist/', include('shoppinglist.urls')),
+    path('contact/', include('contact.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # Für Media-Dateien im Entwicklungsmodus
