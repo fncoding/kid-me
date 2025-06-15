@@ -18,8 +18,8 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
   .container {
     border-bottom: none;
   }
+  
 }
-
 
 .dropdown-menu {
   border-radius: 0.5rem;
@@ -30,3 +30,35 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
 .main-content {
   padding-bottom: 70px;
 }
+
+.alert {
+  margin-top: 100px;
+}
+
+
+.login-card {
+  width: 100%;
+  max-width: 420px;
+  border-width: 0;
+  @media (min-width: 768px) {
+    max-width: 500px;
+  }
+  @media (min-width: 992px) {
+    max-width: 600px;
+  }
+}
+.underline-glow {
+  text-decoration: none;
+  position: relative;
+}
+
+.underline-glow::after {
+  background-color: #fff; 
+  box-shadow: 0 0 10px #fff;
+  height: 4px; 
+  width: 100%;
+  background: linear-gradient(to right, #7F5AF0, #0099ff); 
+  border-radius: 2px; 
+  margin: 1rem 0;
+}
+

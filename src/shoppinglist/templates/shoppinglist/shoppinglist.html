@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
 {% block title %}Shopping List{% endblock %}
 {% block content %}
+<div class="container min-vh-100 pt-3 mt-5">
+{% include 'components/separator.html' %}
 <h2 class="text-center">Shopping List</h2>
-<div style="height: 4px; width: 100%; background: linear-gradient(to right, #7F5AF0, #0099ff); border-radius: 2px; margin: 2rem 0;"></div>
+{% include 'components/separator.html' %}
 <form method="post" class="mb-3">
     {% csrf_token %}
     <div class="input-group">
@@ -46,7 +48,7 @@
     
     <div class="d-flex justify-content-center align-items-center my-2">
         <i class="bi bi-chevron-double-down animated-arrow me-2"></i>
-        <button type="submit" class="btn btn-success btn-sm">Alle Items in Bestand schicken</button>
+        <button type="submit" class="btn btn-success btn-xl">Alle Items in Bestand schicken</button>
         <i class="bi bi-chevron-double-down animated-arrow ms-2"></i>
     </div>
    
@@ -81,5 +83,7 @@
         <li class="list-group-item">Keine Bestände</li>
     {% endfor %}
     {% include 'components/separator.html' %}
+    
 </ul>
+</div>
 {% endblock %}

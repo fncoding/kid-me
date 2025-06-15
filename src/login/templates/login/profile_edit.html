@@ -1,8 +1,11 @@
 {% extends 'base.html' %}
+{% include 'components/separator.html' %}
 {% block title %}Profil bearbeiten{% endblock %}
+{% include 'components/separator.html' %}
 {% block content %}
-<div class="container mt-4">
-    <h2 class="mb-4 text-center">Profil bearbeiten</h2>
+<div class="container mt-5 pt-3">
+    {% include 'components/separator.html' %}
+    <h2 class="m- text-center">Profil bearbeiten</h2>
     {% include 'components/separator.html' %}
     <div class="row justify-content-center">
         <div class="col-lg-6 mb-4">
@@ -46,5 +49,6 @@
         </div>
     </div>
     {% include 'components/separator.html' %}
+    
 </div>
 {% endblock %}
