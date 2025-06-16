@@ -21,6 +21,12 @@ server {
     ssl_certificate /etc/letsencrypt/live/${DOMAIN_NAME}/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/${DOMAIN_NAME}/privkey.pem;
 
+    # Block access to .env and other dotfiles
+    location ~ /\. {
+        deny all;
+        return 403; # Oder return 404; um die Existenz zu verschleiern
+    }
+
  
     location /static/ {
         alias /app/staticfiles/; 
