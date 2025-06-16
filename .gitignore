@@ -60,3 +60,5 @@ build/
 # Optional: temporäre Frontend-Builds
 src/static_src/css/
 src/static_src/js/
+*.css
+*.css.map
