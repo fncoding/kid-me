@@ -1,54 +1,57 @@
 {% extends 'base.html' %}
 {% include 'components/separator.html' %}
-{% block title %}Profil bearbeiten{% endblock %}
+{% block title %}
+  Profil bearbeiten
+{% endblock %}
 {% include 'components/separator.html' %}
 {% block content %}
-<div class="container mt-5 pt-3">
-    {% include 'components/separator.html' %}
-    <h2 class="m- text-center">Profil bearbeiten</h2>
-    {% include 'components/separator.html' %}
-    <div class="row justify-content-center">
+  <div class="d-flex justify-content-center align-items-center min-vh-100 pt-navbar">
+    <div class="container card main-card mt-5 pt-3">
+      {% include 'components/separator.html' %}
+      <h2 class="m- text-center">Profil bearbeiten</h2>
+      {% include 'components/separator.html' %}
+      <div class="row justify-content-center">
         <div class="col-lg-6 mb-4">
-            <div class="card main-card">
-                <div class="card-body">
-                    <h4 class="card-title">Benutzername ändern</h4>
-                    {% include 'components/separator.html' %}
-                    <form method="post">
-                        {% csrf_token %}
-                        <div class="mb-3 form-check-inline">
-                            <label for="id_username" class="form-label">Neuer Benutzername</label>
-                            <input type="text" name="username" id="id_username" class="form-control" value="{{ username_form.username.value|default:user.username }}" required>
-                        </div>
-                        <button type="submit" name="username_submit" class="btn btn-success w-100">Benutzername ändern</button>
-                    </form>
+          <div class="card main-card">
+            <div class="card-body">
+              <h4 class="card-title">Benutzername ändern</h4>
+              {% include 'components/separator.html' %}
+              <form method="post">
+                {% csrf_token %}
+                <div class="mb-3 form-check-inline">
+                  <label for="id_username" class="form-label">Neuer Benutzername</label>
+                  <input type="text" name="username" id="id_username" class="form-control" value="{{ username_form.username.value|default:user.username }}" required />
                 </div>
+                <button type="submit" name="username_submit" class="btn btn-success w-100">Benutzername ändern</button>
+              </form>
             </div>
+          </div>
         </div>
-    </div>
-    {% include 'components/separator.html' %}
-    <div class="row justify-content-center">
+      </div>
+      {% include 'components/separator.html' %}
+      <div class="row justify-content-center">
         <div class="col-lg-6 mb-4">
-            <div class="card main-card">
-                <div class="card-body">
-                    <h4 class="card-title">Passwort ändern</h4>
-                    {% include 'components/separator.html' %}
-                    <form method="post">
-                        {% csrf_token %}
-                        <div class="mb-3">
-                            <label for="id_new_password1" class="form-label">Neues Passwort</label>
-                            <input type="password" name="new_password1" id="id_new_password1" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="id_new_password2" class="form-label">Passwort bestätigen</label>
-                            <input type="password" name="new_password2" id="id_new_password2" class="form-control" required>
-                        </div>
-                        <button type="submit" name="password_submit" class="btn btn-success w-100">Passwort ändern</button>
-                    </form>
+          <div class="card main-card">
+            <div class="card-body">
+              <h4 class="card-title">Passwort ändern</h4>
+              {% include 'components/separator.html' %}
+              <form method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                  <label for="id_new_password1" class="form-label">Neues Passwort</label>
+                  <input type="password" name="new_password1" id="id_new_password1" class="form-control" required />
                 </div>
+                <div class="mb-3">
+                  <label for="id_new_password2" class="form-label">Passwort bestätigen</label>
+                  <input type="password" name="new_password2" id="id_new_password2" class="form-control" required />
+                </div>
+                <button type="submit" name="password_submit" class="btn btn-success w-100">Passwort ändern</button>
+              </form>
             </div>
+          </div>
         </div>
+      </div>
+      {% include 'components/separator.html' %}
     </div>
-    {% include 'components/separator.html' %}
-    
-</div>
+  </div>
 {% endblock %}

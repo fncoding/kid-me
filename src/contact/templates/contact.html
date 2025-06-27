@@ -1,24 +1,52 @@
 {% extends 'base.html' %}
 {% block title %}Kontakt{% endblock %}
 {% block content %}
-<div class="d-flex justify-content-center align-items-center min-vh-100 mt-5">
-    <div class="card main-card pt-4 mt-4">
-    
+<div class="d-flex justify-content-center align-items-center min-vh-100 mt-5 pt-5">
+    <div class="card main-card pt-4 mt-4" style="max-width: 700px;">
         <h2 class="mb-3 text-center">Kontakt</h2>
         {% include 'components/separator.html' %}
-        <div class="card scondary-card p-5 mt-4">
-    
-        <p class="lead">
-            Du möchtest mich kontaktieren? Nutze das Formular unten!<br>
-            <strong>Über mich:</strong> Ich bin Felix Neumann, Junior Webentwickler mit Fokus auf Django, Python, Symfony, PHP, JavaScript, HTML5, CSS3, SQL und moderne Webtechnologien wie Docker. Ich freue mich über Feedback, Anfragen oder einfach einen netten Austausch!
-        </p>
+        <div class="card secondary-card p-4 mt-4">
+            <p class="lead mb-2">
+                Du möchtest mich kontaktieren? Nutze das Formular unten!
+            </p>
+            <div class="mb-3">
+                <strong>Über mich:</strong> Ich bin Felix Neumann, Junior Webentwickler mit Fokus auf moderne Webtechnologien wie Docker. Ich freue mich über Feedback, Anfragen oder einfach einen netten Austausch!
+            </div>
+        </div>
+        <div class="card secondary-card p-4 mt-4">
+            <h4 class="text-center mb-3">Mein Tech Stack</h4>
+            <div class="row g-3 justify-content-center">
+                <div class="col-12 col-md-4">
+                    <div class="text-center mb-2 fw-bold">Backend</div>
+                    <span class="badge bg-primary-subtle text-primary-emphasis me-1 mb-1"><i class="bi bi-filetype-py"></i> Python</span>
+                    <span class="badge bg-primary-subtle text-primary-emphasis me-1 mb-1"><i class="bi bi-database"></i> Django</span>
+                    <span class="badge bg-primary-subtle text-primary-emphasis me-1 mb-1"><i class="bi bi-filetype-php"></i> PHP</span>
+                    <span class="badge bg-primary-subtle text-primary-emphasis me-1 mb-1">Symfony</span>
+                    <span class="badge bg-primary-subtle text-primary-emphasis me-1 mb-1"><i class="bi bi-database"></i> SQL</span>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="text-center mb-2 fw-bold">Frontend</div>
+                    <span class="badge bg-success-subtle text-success-emphasis me-1 mb-1"><i class="bi bi-filetype-js"></i> JavaScript</span>
+                    <span class="badge bg-success-subtle text-success-emphasis me-1 mb-1"><i class="bi bi-filetype-html"></i> HTML5</span>
+                    <span class="badge bg-success-subtle text-success-emphasis me-1 mb-1"><i class="bi bi-filetype-css"></i> CSS3</span>
+                    <span class="badge bg-success-subtle text-success-emphasis me-1 mb-1">Sass</span>
+                    <span class="badge bg-success-subtle text-success-emphasis me-1 mb-1"><i class="bi bi-bootstrap"></i> Bootstrap</span>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="text-center mb-2 fw-bold">Tools &amp; DevOps</div>
+                    <span class="badge bg-info-subtle text-info-emphasis me-1 mb-1"><i class="bi bi-git"></i> Git</span>
+                    <span class="badge bg-info-subtle text-info-emphasis me-1 mb-1"><i class="bi bi-box"></i> Docker</span>
+                    <span class="badge bg-info-subtle text-info-emphasis me-1 mb-1"><i class="bi bi-terminal"></i> Linux</span>
+                    <span class="badge bg-info-subtle text-info-emphasis me-1 mb-1"><i class="bi bi-windows"></i> Windows</span>
+                </div>
+            </div>
         </div>
         <div class="secondary-card p-5 mt-4">
             <div class="card-body">
                 <form method="post">
                     {% csrf_token %}
                     {{ form.as_p }}
-                    <button type="submit" class="btn btn-success">Absenden</button>
+                    <button type="submit" class="btn btn-outline-info">Absenden</button>
                 </form>
             </div>
         </div>

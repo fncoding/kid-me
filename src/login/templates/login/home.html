@@ -5,19 +5,17 @@
 {% block content %}
 <div class="d-flex justify-content-center align-items-center min-vh-100 pt-navbar">
   
-<div class="card text-center p-4 rounded-3 bg-body-tertiary">
+<div class="card main-card text-center p-4 rounded-5 bg-body-tertiary">
     <h1 class="display-5 fw-bold">📖 Willkommen </h1>
     {% include 'components/separator.html' %}
     <p class="fs-4">Dies ist die öffentliche Startseite.</p>
-  
     <p class="fs-5"> Melden Sie sich an oder registrieren Sie sich, um auf Ihr Dashboard zuzugreifen.</p>
-
     <div class="row justify-content-center mt-4">
         <div class="col-12 col-sm-auto mb-2 mb-sm-0">
-            <a href="{% url 'login' %}" class="btn btn-success btn-lg w-100" style="color: var(--bs-btn-color); background-color: var(--bs-btn-bg);">Login</a>
+            <a href="{% url 'login' %}" class="btn btn-outline-info btn-lg w-100">Login</a>
         </div>
         <div class="col-12 col-sm-auto">
-            <a href="{% url 'register' %}" class="btn btn-outline-secondary btn-lg w-100">Registrieren</a>
+            <a href="{% url 'register' %}" class="btn btn-outline-light btn-lg w-100">Registrieren</a>
 
         </div>
      

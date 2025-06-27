@@ -110,7 +110,7 @@ def contact(request):
         email = request.POST.get("email")
         message = request.POST.get("message")
         if email and message:
-            # Beispiel: E-Mail an dich selbst senden
+            
             send_mail(
                 subject=f"Kontaktformular von {email}",
                 message=message,

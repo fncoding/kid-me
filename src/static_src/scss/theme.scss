@@ -57,9 +57,12 @@ body {
     border-color: $dark-bg;
     border-radius: 25px;
     box-shadow: 0 0 26px rgba($purple-accent, 0.7);
-
     box-shadow: 0 10px 20px rgba($dark-bg, 0.5), 0 0 20px $glow-color;
     box-shadow: 0 10px 20px rgba($dark-text, 0.5), 0 0 20px $glow-color;
+    .btn-outline-light:hover {
+      color: $dark-border;
+    }
+    
   }
 
 
@@ -77,8 +80,8 @@ body {
   }
 
   .secondary-card:hover {
-    box-shadow: 0 10px 20px rgba($dark-bg, 0.5), 0 0 20px $glow-color;
-    box-shadow: 0 10px 20px rgba($dark-text, 0.5), 0 0 20px $glow-color;
+    box-shadow: 0 10px 10px rgba($dark-bg, 0.5), 0 0 20px $glow-color;
+    box-shadow: 0 5px 20px rgba($dark-text, 0.5), 0 0 20px $glow-color;
   }
 
   .btn-primary {
@@ -150,7 +153,7 @@ body {
     color: inerhit;
 
     &:hover {
-      color: lighten($purple-accent, 10%);
+      color: $dark-text;
     }
   }
 
