@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="d-flex justify-content-center align-items-center min-vh-100 pt-navbar">
+    <div class="card main-card p-4 mt-5">
+        
+      <div class="d-flex justify-content-between ">
+        <h1 class="text-center">ShoppingLists</h1>
+        <a class="align-self-center" href="{% url 'shoppinglist_create' %}"><button class="btn btn-outline-info btn-sm">Create ShoppingList</button></a>
+      </div>
+      {% include 'components/separator.html' %}
+
+      <div class="card secondary-card p-3 m-2">
+        <h2>Your Shopping Lists</h2>
+        {% include 'components/separator.html' %}
+
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">List-Name</th>
+                <th scope="col" style="white-space: nowrap;">Shared With</th>
+                <th scope="col" colspan="3" class="text-center">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for shoppinglist in shoppinglists %}
+                <tr>
+                  <td>
+                    <p>{{ shoppinglist.name }}</p>
+                  </td>
+                  <td>
+                    {% for user in shoppinglist.shared_with.all %}
+                      {{ user.username }}{% if not forloop.last %}, {% endif %}
+                    {% empty %}
+                      Not shared
+                    {% endfor %}
+                  </td>
+                  <td>
+                    <a href="{% url 'shoppinglist_update' shoppinglist.pk %}"><button class="btn btn-outline-info btn-sm">Edit</button></a>
+                  </td>
+                  <td>
+                    <form action="{% url 'shoppinglist_delete' shoppinglist.pk %}" method="post" class="d-inline">
+                      {% csrf_token %}
+                      <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
+                    </form>
+                  </td>
+                  <td>
+                    <a href="{% url 'shoppinglist_items' shoppinglist.pk %}"><button class="btn btn-outline-success btn-sm" title="Zur Liste"><i class="bi bi-play-circle"></i></button></a>
+                  </td>
+                </tr>
+              {% empty %}
+                <tr>
+                  <td colspan="5" class="text-center">You have no shopping lists yet.</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

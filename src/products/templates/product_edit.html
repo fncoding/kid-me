@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="d-flex justify-content-center align-items-center min-vh-100 pt-navbar">
+    <div class="main-card p-4">
+      <h1>Edit Product</h1>
+      {% include 'components/separator.html' %}
+
+      <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="d-flex justify-content-between">
+          <button type="submit" class="btn btn-outline-info">Edit Product</button>
+          <a href="{% url 'products' %}" class="btn btn-outline-light">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}

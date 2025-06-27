@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content%}
+<div class="d-flex justify-content-center align-items-center min-vh-100 pt-navbar">
+    <div class="card p-4">
+        <h1>Delete Product</h1>
+        {% include "components/separator.html" %}
+
+        <p>Are you sure you want to delete this {{product.name}}?</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Delete Product</button>
+            <a class="btn btn-secondary" href="{% url 'products' %}">Cancel</a>
+    </div>
+</div>
+{% endblock %}

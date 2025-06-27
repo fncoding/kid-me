@@ -9,13 +9,13 @@
     {% include 'components/separator.html' %}
     <div class="row justify-content-center">
         <div class="col-lg-6 mb-4">
-            <div class="card">
+            <div class="card main-card">
                 <div class="card-body">
                     <h4 class="card-title">Benutzername ändern</h4>
                     {% include 'components/separator.html' %}
                     <form method="post">
                         {% csrf_token %}
-                        <div class="mb-3">
+                        <div class="mb-3 form-check-inline">
                             <label for="id_username" class="form-label">Neuer Benutzername</label>
                             <input type="text" name="username" id="id_username" class="form-control" value="{{ username_form.username.value|default:user.username }}" required>
                         </div>
@@ -28,7 +28,7 @@
     {% include 'components/separator.html' %}
     <div class="row justify-content-center">
         <div class="col-lg-6 mb-4">
-            <div class="card">
+            <div class="card main-card">
                 <div class="card-body">
                     <h4 class="card-title">Passwort ändern</h4>
                     {% include 'components/separator.html' %}

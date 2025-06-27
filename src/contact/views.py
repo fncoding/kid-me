@@ -15,7 +15,7 @@ def contact(request):
                     message=data['message'],
                     from_email=settings.DEFAULT_FROM_EMAIL,
                     recipient_list=[settings.DEFAULT_FROM_EMAIL],
-                    fail_silently=False,  # Changed to False
+                    fail_silently=False, 
                 )
                 messages.success(request, "Danke für deine Nachricht!")
                 return redirect("contact")

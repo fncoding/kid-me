@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content%}
+<div class="d-flex justify-content-center align-items-center min-vh-100 pt-navbar">
+    <div class="card p-4">
+        <h1>Edit Shopping List</h1>
+        {% include "components/separator.html" %}
+
+        <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+        <a href="{% url 'shoppinglist_items' %}" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content%}
+<div class="d-flex justify-content-center align-items-center min-vh-100 pt-navbar">
+    <div class="card p-4">
+        <h1>Add Items to Shopping List</h1>
+        {% include "components/separator.html" %}
+
+         <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        
+        <button type="submit" class="btn btn-primary">Add Item</button>
+        <a href="{% url 'shoppinglist_items' pk=shoppinglist.pk %}" class="btn btn-secondary">Cancel</a>
+        
+        {% if form.errors %}
+            <div class="alert alert-danger mt-3">
+                <strong>Error:</strong> Please correct the errors below.
+            </div>
+        {% endif %}
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -45,8 +45,12 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'login',  
-    'shoppinglist',
+    'shoppinglists',
     'contact',
+    'products',
+    'stocks',
+    
+
 ]
 
 MIDDLEWARE = [
