@@ -9,9 +9,7 @@
             <p class="lead mb-2">
                 Du möchtest mich kontaktieren? Nutze das Formular unten!
             </p>
-            <div class="mb-3">
-                <strong>Über mich:</strong> Ich bin Felix Neumann, Junior Webentwickler mit Fokus auf moderne Webtechnologien wie Docker. Ich freue mich über Feedback, Anfragen oder einfach einen netten Austausch!
-            </div>
+            
         </div>
         <div class="card secondary-card p-4 mt-4">
             <h4 class="text-center mb-3">Mein Tech Stack</h4>
@@ -43,6 +41,13 @@
         </div>
         <div class="secondary-card p-5 mt-4">
             <div class="card-body">
+               <div class="mb-3">
+                <strong>Über mich:</strong> 
+            </div>
+                <p>👋Mein Name ist <strong>Felix Neumann</strong></p> 
+                {% include 'components/separator.html' %}
+                <p>Ich bin ein Junior Webentwickler mit Fokus auf moderne Webtechnologien und Frameworks. Ich freue mich über Feedback, Anfragen oder einfach einen netten Austausch!</p>
+                 {% include 'components/separator.html' %}
                 <form method="post">
                     {% csrf_token %}
                     {{ form.as_p }}

@@ -1,54 +1,70 @@
 {% load static %}
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{% block title %}FN{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <link rel="stylesheet" href="{% static 'bootstrap-icons/font/bootstrap-icons.css' %}">
-    <link rel="icon" type="image/png" href="{% static 'img/neural.png' %}">
-    <style>
-     
-    </style>
-</head>
-<body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+      {% block title %}
+        FN
+      {% endblock %}
+    </title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+    <link rel="stylesheet" href="{% static 'bootstrap-icons/font/bootstrap-icons.css' %}" />
+    <link rel="icon" type="image/png" href="{% static 'img/neural.png' %}" />
+    <script src="{% static 'js/main-cards-animate.js' %}"></script>
+    <style></style>
+  </head>
+  <body>
     {% include 'components/navbar.html' %}
     <main class="container pt-navbar">
-        {% if messages %}
-            {% for message in messages %}
-                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-                    {{ message }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            {% endfor %}
-        {% endif %}
-        
-        <div class="row justify-content-center background-dark">
-            <div class="col-md-8 col-lg-6">
-                {% block content %}
-                {% endblock %}
-            </div>
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+
+      <div class="row justify-content-center background-dark">
+        <div class="col-md-8 col-lg-6">
+          {% block content %}
+
+          {% endblock %}
         </div>
+      </div>
     </main>
 
     <div style="height: 70px;"></div>
     {% include 'components/footer.html' %}
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
     <script>
-    function togglePassword(inputId, iconSpan) {
-        const input = document.getElementById(inputId);
-        const icon = iconSpan.querySelector('i');
-        if (input.type === "password") {
-            input.type = "text";
-            icon.classList.remove('bi-eye');
-            icon.classList.add('bi-eye-slash');
+      function togglePassword(inputId, iconSpan) {
+        const input = document.getElementById(inputId)
+        const icon = iconSpan.querySelector('i')
+        if (input.type === 'password') {
+          input.type = 'text'
+          icon.classList.remove('bi-eye')
+          icon.classList.add('bi-eye-slash')
         } else {
-            input.type = "password";
-            icon.classList.remove('bi-eye-slash');
-            icon.classList.add('bi-eye');
+          input.type = 'password'
+          icon.classList.remove('bi-eye-slash')
+          icon.classList.add('bi-eye')
         }
-    }
+      }
+      document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('.main-card').forEach((card, i) => {
+          setTimeout(() => {
+            card.classList.add('visible')
+          }, 200 + i * 120)
+        })
+        document.querySelectorAll('.secondary-card').forEach((card, i) => {
+          setTimeout(() => {
+            card.classList.add('visible')
+          }, 800 + i * 200) // Späterer und entspannterer Start
+        })
+      })
     </script>
-</body>
+  </body>
 </html>
