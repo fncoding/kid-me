@@ -64,3 +64,4 @@ src/static_src/js/
 *.css.map
 src/login/migrations/0001_initial.py
 src/products/migrations/__init__.py
+src/stocks/migrations/0001_initial.py
