@@ -172,3 +172,30 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
   }
 }
 
+// jQuery UI Autocomplete Dropdown Styling
+.ui-autocomplete {
+  background: #242629 !important; // dunkle Karte
+  color: #fff;
+  border-radius: 0.5rem;
+  border: 0px solid #6e89f6;
+  box-shadow: 0 4px 24px rgba(35,194,225,0.15);
+  padding: 0.5rem 0;
+  font-family: 'Roboto', Arial, sans-serif;
+  z-index: 2000 !important;
+}
+
+.ui-menu-item-wrapper {
+  padding: 0.5rem 1.2rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  color: #fff;
+  background: transparent;
+  border-width: 0;
+}
+
+.ui-state-active, .ui-menu-item-wrapper.ui-state-active {
+  background: #0689db !important; /* Bootstrap 5 primary */
+  color: #fff !important;
+  border-radius: 0.5rem;
+}
+

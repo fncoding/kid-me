@@ -8,8 +8,13 @@ from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse
 from django.views.decorators.http import require_POST
 from django.utils.decorators import method_decorator
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from stocks.models import StockList, StockListItem
+from products.models import Product
+
+from django.contrib import messages
+from django.db import IntegrityError
 
 
 # ShoppingListView: List all shopping lists for the logged-in user, including those shared with them.
@@ -54,11 +59,16 @@ class ShoppingListItemView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         self.shoppinglist = ShoppingList.objects.get(pk=self.kwargs['pk'])
-        return ShoppingListItem.objects.filter(shopping_list=self.shoppinglist)
+        queryset = ShoppingListItem.objects.filter(shopping_list=self.shoppinglist)
+        q = self.request.GET.get('q')
+        if q:
+            queryset = queryset.filter(product__name__icontains=q)
+        return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['shoppinglist'] = ShoppingList.objects.get(pk=self.kwargs['pk'])
+        context['request'] = self.request  # Damit {{ request.GET.q }} im Template funktioniert
         return context
 
   
@@ -66,6 +76,32 @@ class ShoppingListItemCreateView(CreateView):
     model = ShoppingListItem
     form_class = ShoppingListItemForm
     template_name = 'shoppinglist_item/shoppinglist_item_create.html'
+
+    def post(self, request, *args, **kwargs):
+        shoppinglist = ShoppingList.objects.get(pk=self.kwargs['pk'])
+        product_name = request.POST.get('product_name')
+        quantity = request.POST.get('quantity', 1)
+        product = Product.objects.filter(name__iexact=product_name).first()
+        if not product:
+            try:
+                # Passe die Default-Werte an dein Product-Modell an!
+                product = Product.objects.create(
+                    name=product_name,
+                    price=0,  # Default-Wert, falls Pflichtfeld
+                    # weitere Pflichtfelder mit Default-Werten ergänzen!
+                )
+            except IntegrityError:
+                messages.error(request, "Produkt konnte nicht angelegt werden. Bitte alle Pflichtfelder prüfen.")
+                return redirect('shoppinglist_items', pk=shoppinglist.pk)
+        if ShoppingListItem.objects.filter(shopping_list=shoppinglist, product=product).exists():
+            messages.error(request, "Dieses Produkt ist bereits auf der Liste.")
+        else:
+            ShoppingListItem.objects.create(
+                shopping_list=shoppinglist,
+                product=product,
+                quantity=quantity
+            )
+        return redirect('shoppinglist_items', pk=shoppinglist.pk)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -149,3 +185,37 @@ def update_item_fields(request, pk, item_pk):
         if updated:
             item.save()
     return HttpResponseRedirect(reverse('shoppinglist_items', kwargs={'pk': pk}))
+
+def transfer_shoppinglist_to_stock(request, pk):
+    shoppinglist = ShoppingList.objects.get(pk=pk)
+    # Beispiel: Nimm die erste StockList des Users (oder biete Auswahl an)
+    stocklists = StockList.objects.filter(owner=request.user)
+    if not stocklists.exists():
+        messages.error(request, "Du hast noch keine Vorratsliste.")
+        return redirect('shoppinglist_items', pk=pk)
+    stocklist = stocklists.first()  # Oder Auswahl anbieten
+
+    items = ShoppingListItem.objects.filter(shopping_list=shoppinglist)
+    count = 0
+    for item in items:
+        # Prüfe, ob das Produkt schon in der StockList ist
+        stock_item, created = StockListItem.objects.get_or_create(
+            stock_list=stocklist,
+            product=item.product,
+            defaults={'quantity': item.quantity, 'is_purchased': False}
+        )
+        if not created:
+            # Falls schon vorhanden, erhöhe die Menge
+            stock_item.quantity += item.quantity
+            stock_item.save()
+        count += 1
+    messages.success(request, f"{count} Produkte wurden in die Vorratsliste übernommen.")
+    return redirect('stocklist_items', pk=stocklist.pk)
+
+def product_autocomplete(request):
+    q = request.GET.get('term', '')
+    print("AUTOCOMPLETE QUERY:", q)  # Debug
+    products = Product.objects.filter(name__icontains=q).order_by('name')[:10]
+    results = [{'id': p.id, 'label': p.name, 'value': p.name} for p in products]
+    print("AUTOCOMPLETE RESULTS:", results)  # Debug
+    return JsonResponse(results, safe=False)

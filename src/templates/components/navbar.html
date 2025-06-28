@@ -13,9 +13,24 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <div class="navbar-nav ms-auto">
         {% if user.is_authenticated %}
-          <a class="nav-link" href="{% url 'stocklists' %}">Stocks</a>
-          <a class="nav-link" href="{% url 'shoppinglists' %}">ShoppingList</a>
-          <a class="nav-link" href="{% url 'products' %}">Products</a>
+          <div class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle navbar-username" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Apps
+              <i class="bi bi-chevron-down ms-1"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+              <li>
+                <a class="nav-link" href="{% url 'stocklists' %}">Stocks</a>
+              </li>
+              <li>
+                <a class="nav-link" href="{% url 'shoppinglists' %}">ShoppingList</a>
+              </li>
+              <li>
+                <a class="nav-link" href="{% url 'products' %}">Products</a>
+              </li>
+            </ul>
+          </div>
+
           <div class="nav-item dropdown">
             <a class="nav-link dropdown-toggle navbar-username" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               {{ user.username }}
@@ -23,10 +38,10 @@
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
               <li>
-                <a class="dropdown-item" href="{% url 'profile_edit' %}">Profil bearbeiten</a>
+                <a class="dropdown-item" href="{% url 'profile_edit' %}">Profile</a>
               </li>
               <li>
-                <a class="dropdown-item" href="{% url 'contact' %}">Kontakt</a>
+                <a class="dropdown-item" href="{% url 'contact' %}">ContactAdmin</a>
               </li>
               <li>
                 <form method="post" action="{% url 'logout' %}" style="margin: 0;">

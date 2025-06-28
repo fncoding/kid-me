@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import ShoppingListView, ShoppingListCreateView, ShoppingListUpdateView, ShoppingListDeleteView, ShoppingListView, ShoppingListDetailView, ShoppingListItemView, ShoppingListItemCreateView, ShoppingListItemUpdateView, ShoppingListItemDeleteView, toggle_item_purchased, update_item_fields
+from .views import ShoppingListView, ShoppingListCreateView, ShoppingListUpdateView, ShoppingListDeleteView, ShoppingListView, ShoppingListDetailView, ShoppingListItemView, ShoppingListItemCreateView, ShoppingListItemUpdateView, ShoppingListItemDeleteView, toggle_item_purchased, update_item_fields, transfer_shoppinglist_to_stock, product_autocomplete
 
 urlpatterns = [
     path('', ShoppingListView.as_view(), name='shoppinglists'),
@@ -13,4 +13,6 @@ urlpatterns = [
     path('<int:pk>/items/<int:item_pk>/delete/', ShoppingListItemDeleteView.as_view(), name='shoppinglist_item_delete'),
     path('<int:pk>/items/<int:item_pk>/toggle/', toggle_item_purchased, name='shoppinglist_item_toggle'),
     path('<int:pk>/items/<int:item_pk>/update/', update_item_fields, name='shoppinglist_item_update_fields'),
+    path('<int:pk>/transfer_to_stock/', transfer_shoppinglist_to_stock, name='shoppinglist_transfer_to_stock'),
+    path('product-autocomplete/', product_autocomplete, name='product_autocomplete'),
 ]
