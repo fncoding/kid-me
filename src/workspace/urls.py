@@ -27,4 +27,5 @@ urlpatterns = [
     path('', include('contact.urls')),
     path('shoppinglists/', include('shoppinglists.urls')),
     path('contact/', include('contact.urls')),
+    path('stocks/', include('stocks.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # Für Media-Dateien im Entwicklungsmodus

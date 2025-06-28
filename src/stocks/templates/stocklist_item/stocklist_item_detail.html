@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card main-card p-4 mt-5">
+      <h1>Item Details</h1>
+      {% include 'components/separator.html' %}
+      <ul>
+        <li>
+          <strong>Product:</strong> {{ object.product.name }}
+        </li>
+        <li>
+          <strong>Quantity:</strong> {{ object.quantity }}
+        </li>
+        <li>
+          <strong>Purchased:</strong> {% if object.is_purchased %}
+            Yes
+          {% else %}
+            No
+          {% endif %}
+        </li>
+      </ul>
+      <a href="{% url 'stocklist_items' stocklist.pk %}" class="btn btn-outline-secondary">Back to List</a>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="d-flex justify-content-center align-items-center min-vh-100">
+  <div class="card main-card p-4 mt-5">
+    <h1>Delete Item</h1>
+    {% include 'components/separator.html' %}
+    <p>Are you sure you want to delete <strong>{{ object.product.name }}</strong> from "{{ stocklist.name }}"?</p>
+    <form method="post">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger">Delete</button>
+      <a href="{% url 'stocklist_items' stocklist.pk %}" class="btn btn-secondary">Cancel</a>
+    </form>
+  </div>
+</div>
+{% endblock %}

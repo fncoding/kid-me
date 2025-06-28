@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content%}
+<div class="d-flex justify-content-center align-items-center min-vh-100 pt-navbar">
+    <div class="main-card p-4">
+        <h1 class="text-center">💫{{ stocklist.name }}✨</h1>
+        {% include "components/separator.html" %}
+        <div class="secondary-card p-4 m-5">
+            <div class="d-flex justify-content-center align-items-center mb-3">
+                <a class="align-self-center" href="{% url 'stocklist_item_create' stocklist.pk %}">
+                    <button class="btn btn-outline-info btn-lg">Add Item</button>
+                    {% include "components/separator.html" %}
+                </a>
+            </div>
+            <ul class="list-group">
+            {% for item in stocklist_items %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <form method="post" action="{% url 'stocklist_item_update_fields' stocklist.pk item.pk %}" class="d-flex flex-grow-1 align-items-center" style="gap: 1rem;">
+                        {% csrf_token %}
+                        <input type="checkbox" name="is_purchased" value="true" class="form-check-input me-2" onchange="this.form.submit()" {% if item.is_purchased %}checked{% endif %}>
+                        <span class="flex-grow-1 {% if item.is_purchased %}text-decoration-line-through text-muted{% endif %}">{{ item.product.name }}</span>
+                        <input type="number" name="quantity" value="{{ item.quantity }}" min="1" class="form-control form-control-sm w-auto text-center" style="max-width: 70px;" onchange="this.form.submit()">
+                    </form>
+                </li>
+            {% empty %}
+                <li class="list-group-item">Keine Einträge</li>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

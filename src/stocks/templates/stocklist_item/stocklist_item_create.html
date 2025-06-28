@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="d-flex justify-content-center align-items-center min-vh-100">
+  <div class="card main-card p-4 mt-5">
+    <h1>Add Item to "{{ stocklist.name }}"</h1>
+    {% include 'components/separator.html' %}
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+
+      {% if error_message %}
+        <div class="alert alert-danger mt-3">
+          {{ error_message }}
+        </div>
+      {% endif %}
+
+      <div class="d-flex justify-content-between">
+        <button type="submit" class="btn btn-outline-info">Add Item</button>
+        <a href="{% url 'stocklist_items' stocklist.pk %}" class="btn btn-outline-secondary">Cancel</a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

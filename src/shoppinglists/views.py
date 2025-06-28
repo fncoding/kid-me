@@ -4,7 +4,7 @@ from .forms import ShoppingListForm, ShoppingListUpdateForm, ShoppingListItemFor
 from django.db.models import Q
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse
 from django.views.decorators.http import require_POST
 from django.utils.decorators import method_decorator
@@ -73,11 +73,33 @@ class ShoppingListItemCreateView(CreateView):
         return context
 
     def form_valid(self, form):
-        form.instance.shopping_list = ShoppingList.objects.get(pk=self.kwargs['pk'])
+        shoppinglist = ShoppingList.objects.get(pk=self.kwargs['pk'])
+        form.instance.shopping_list = shoppinglist
+        product = form.cleaned_data['product']
+        # Prüfen, ob das Produkt schon existiert
+        if ShoppingListItem.objects.filter(shopping_list=shoppinglist, product=product).exists():
+            return self.render_to_response(self.get_context_data(
+                form=form,
+                error_message='Dieses Produkt ist bereits auf der Liste.'
+            ))
         return super().form_valid(form)
 
     def get_success_url(self):
         return reverse('shoppinglist_items', kwargs={'pk': self.kwargs['pk']})
+
+def shoppinglist_item_create(request, pk):
+    shoppinglist = get_object_or_404(ShoppingList, pk=pk)
+    if request.method == 'POST':
+        form = ShoppingListItemForm(request.POST)
+        if form.is_valid():
+            product = form.cleaned_data['product']
+            if ShoppingListItem.objects.filter(shopping_list=shoppinglist, product=product).exists():
+                return render(request, 'shoppinglist_item/shoppinglist_item_create.html', {
+                    'form': form,
+                    'shoppinglist': shoppinglist,
+                    'error_message': 'Dieses Produkt ist bereits auf der Liste.'
+                })
+
 
 class ShoppingListItemUpdateView(UpdateView):
     model = ShoppingListItem
