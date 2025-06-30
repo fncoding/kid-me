@@ -28,4 +28,5 @@ urlpatterns = [
     path('shoppinglists/', include('shoppinglists.urls')),
     path('contact/', include('contact.urls')),
     path('stocks/', include('stocks.urls')),
+    path('mystack/', include('mystack.urls')) 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # Für Media-Dateien im Entwicklungsmodus

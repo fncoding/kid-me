@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'contact',
     'products',
     'stocks',
+    'mystack'
     
 
 ]
