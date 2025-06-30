@@ -12,10 +12,10 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <div class="navbar-nav ms-auto">
-        <div class="navbar-nav ms-auto">
+    
         <a class="nav-link" href="{% url 'mystack' %}">MyStack</a>
         <a class="nav-link" href="{% url 'contact' %}">Contact</a>
-      </div>
+    
         {% if user.is_authenticated %}
           <div class="nav-item dropdown">
             <a class="nav-link dropdown-toggle navbar-username" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -34,7 +34,6 @@
               </li>
             </ul>
           </div>
-
           <div class="nav-item dropdown">
             <a class="nav-link dropdown-toggle navbar-username" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               {{ user.username }}
