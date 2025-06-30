@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container pt-navbar min-vh-100 d-flex justify-content-center align-items-center">
+    <div class="main-card card shadow-lg p-4">
+        <h2>In welche Vorratsliste übertragen?</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-outline-info">Übertragen</button>
+        </form>
+        <a href="{% url 'shoppinglist_items' shoppinglist.pk %}" class="btn btn-link mt-3">Zurück zur Einkaufsliste</a>
+    </div>
+</div>
+{% endblock %}
