@@ -31,6 +31,12 @@
                             <span class="flex-grow-1 {% if item.is_purchased %}text-decoration-line-through text-muted{% endif %}">{{ item.product.name }}</span>
                             <input type="number" name="quantity" value="{{ item.quantity }}" min="1" class="form-control form-control-sm w-auto text-center" style="max-width: 70px;" onchange="this.form.submit()">
                         </form>
+                        <form method="post" action="{% url 'shoppinglist_item_delete' shoppinglist.pk item.pk %}" class="ms-2">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-outline-danger btn-sm" onclick="return confirm('Are you sure you want to delete this item?');" title="Delete item">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </form>
                     </li>
                 {% empty %}
                     <li class="list-group-item text-center text-muted">No Entries</li>

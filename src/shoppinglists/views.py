@@ -152,6 +152,9 @@ class ShoppingListItemDeleteView(DeleteView):
     model = ShoppingListItem
     template_name = 'shoppinglist_item/shoppinglist_item_delete.html'
 
+    def get_object(self, queryset=None):
+        return ShoppingListItem.objects.get(pk=self.kwargs['item_pk'], shopping_list_id=self.kwargs['pk'])
+
     def get_success_url(self):
         return reverse('shoppinglist_items', kwargs={'pk': self.kwargs['pk']})
 

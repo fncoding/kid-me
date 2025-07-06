@@ -5,11 +5,11 @@
         <h1>Delete Shopping List Item</h1>
         {% include "components/separator.html" %}
 
-        <p>Are you sure you want to delete the list "{{ object.name }}"?</p>
+        <p>Are you sure you want to delete "{{ object.product.name }}" from "{{ object.shopping_list.name }}"?</p>
         <form method="post">
             {% csrf_token %}
             <button type="submit" class="btn btn-danger">Delete</button>
-            <a href="{% url 'shoppinglist_items' %}" class="btn btn-secondary">Cancel</a>
+            <a href="{% url 'shoppinglist_items' object.shopping_list.pk %}" class="btn btn-secondary">Cancel</a>
         </form>
     </div>
 </div>
