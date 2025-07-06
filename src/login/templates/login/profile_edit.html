@@ -52,6 +52,36 @@
         </div>
       </div>
       {% include 'components/separator.html' %}
+      <!-- Datenexport Sektion -->
+      <div class="row justify-content-center">
+        <div class="col-lg-6 mb-4">
+          <div class="card main-card">
+            <div class="card-body">
+              <h4 class="card-title">Daten herunterladen</h4>
+              {% include 'components/separator.html' %}
+              <p class="text-muted">Laden Sie alle Ihre gespeicherten Daten herunter (DSGVO Art. 20).</p>
+              <form method="post" action="{% url 'export_user_data' %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-info w-100">Meine Daten herunterladen</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Account löschen Sektion -->
+      <div class="row justify-content-center">
+        <div class="col-lg-6 mb-4">
+          <div class="card main-card border-danger">
+            <div class="card-body">
+              <h4 class="card-title text-danger">Account löschen</h4>
+              {% include 'components/separator.html' %}
+              <p class="text-muted">Diese Aktion kann nicht rückgängig gemacht werden!</p>
+              <a href="?delete_account=1" class="btn btn-danger w-100">Account löschen</a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 {% endblock %}

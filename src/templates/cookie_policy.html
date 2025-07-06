@@ -1,0 +1,203 @@
+{% extends 'base.html' %}
+
+{% block title %}Cookie-Richtlinie{% endblock %}
+
+{% block content %}
+<div class="container mt-5 pt-navbar">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card main-card">
+                <div class="card-body p-4">
+                    <h1 class="mb-4">🍪 Cookie-Richtlinie</h1>
+                    {% include 'components/separator.html' %}
+                    
+                    <div class="alert alert-info">
+                        <h5><i class="fas fa-info-circle"></i> Was sind Cookies?</h5>
+                        <p class="mb-0">
+                            Cookies sind kleine Textdateien, die von Websites auf Ihrem Gerät gespeichert werden. 
+                            Sie helfen dabei, die Website-Funktionalität bereitzustellen und Ihre Präferenzen zu speichern.
+                        </p>
+                    </div>
+
+                    <h2>Arten von Cookies, die wir verwenden</h2>
+                    
+                    <div class="row mt-4">
+                        <div class="col-md-6 mb-4">
+                            <div class="card border-success">
+                                <div class="card-header bg-success text-white">
+                                    <h5 class="mb-0"><i class="fas fa-shield-alt"></i> Notwendige Cookies</h5>
+                                </div>
+                                <div class="card-body">
+                                    <p><strong>Status:</strong> <span class="text-success">Immer aktiv</span></p>
+                                    <p><strong>Zweck:</strong> Grundlegende Funktionalität der Website</p>
+                                    <ul class="small">
+                                        <li><code>sessionid</code> - Django Session-Management</li>
+                                        <li><code>csrftoken</code> - Schutz vor CSRF-Angriffen</li>
+                                        <li><code>cookieConsent</code> - Speichert Ihre Cookie-Einstellungen</li>
+                                    </ul>
+                                    <p class="small text-muted">
+                                        Diese Cookies sind für die Sicherheit und Funktionalität unerlässlich und können nicht deaktiviert werden.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6 mb-4">
+                            <div class="card border-info">
+                                <div class="card-header bg-info text-white">
+                                    <h5 class="mb-0"><i class="fas fa-chart-bar"></i> Analyse-Cookies</h5>
+                                </div>
+                                <div class="card-body">
+                                    <p><strong>Status:</strong> <span class="text-info">Optional</span></p>
+                                    <p><strong>Zweck:</strong> Anonyme Nutzungsstatistiken</p>
+                                    <ul class="small">
+                                        <li>Besucherzahlen (anonym)</li>
+                                        <li>Beliebte Seitenbereiche</li>
+                                        <li>Technische Leistungsdaten</li>
+                                    </ul>
+                                    <p class="small text-muted">
+                                        Helfen uns, die Website zu verbessern. Keine personenbezogenen Daten werden gesammelt.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h2>Cookie-Verwaltung</h2>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Ihre Kontrolle</h5>
+                            <ul>
+                                <li>Jederzeit Einstellungen ändern</li>
+                                <li>Einzelne Cookie-Kategorien aktivieren/deaktivieren</li>
+                                <li>Vollständiges Zurücksetzen möglich</li>
+                                <li>Transparente Übersicht aller Cookies</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h5>Browser-Einstellungen</h5>
+                            <p class="small">
+                                Sie können Cookies auch direkt in Ihrem Browser verwalten:
+                            </p>
+                            <ul class="small">
+                                <li><strong>Chrome:</strong> Einstellungen → Erweitert → Datenschutz</li>
+                                <li><strong>Firefox:</strong> Einstellungen → Datenschutz & Sicherheit</li>
+                                <li><strong>Safari:</strong> Einstellungen → Datenschutz</li>
+                                <li><strong>Edge:</strong> Einstellungen → Cookies und Websiteberechtigungen</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-warning mt-4">
+                        <h5><i class="fas fa-exclamation-triangle"></i> Wichtiger Hinweis</h5>
+                        <p class="mb-0">
+                            Das Deaktivieren notwendiger Cookies kann die Funktionalität der Website beeinträchtigen. 
+                            Analyse-Cookies sind optional und können jederzeit deaktiviert werden.
+                        </p>
+                    </div>
+
+                    <h2>Ihre Rechte</h2>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Recht</th>
+                                    <th>Beschreibung</th>
+                                    <th>Wie ausüben</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>Information</strong></td>
+                                    <td>Erfahren, welche Cookies gesetzt werden</td>
+                                    <td>Diese Seite, Cookie-Banner</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Kontrolle</strong></td>
+                                    <td>Cookies aktivieren/deaktivieren</td>
+                                    <td>Cookie-Einstellungen</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Löschen</strong></td>
+                                    <td>Bestehende Cookies entfernen</td>
+                                    <td>Browser-Einstellungen</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Widerruf</strong></td>
+                                    <td>Zustimmung jederzeit zurückziehen</td>
+                                    <td>Cookie-Einstellungen zurücksetzen</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="card bg-light mt-4">
+                        <div class="card-body">
+                            <h5><i class="fas fa-user-shield"></i> Datenschutz-freundlicher Ansatz</h5>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6>Was wir NICHT tun:</h6>
+                                    <ul class="text-success">
+                                        <li>Keine Weitergabe an Dritte</li>
+                                        <li>Keine Verkaufsverfolgung</li>
+                                        <li>Keine Social Media Tracking</li>
+                                        <li>Keine versteckten Cookies</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6>Was wir tun:</h6>
+                                    <ul class="text-primary">
+                                        <li>Minimale Datensammlung</li>
+                                        <li>Transparente Kommunikation</li>
+                                        <li>Vollständige Kontrolle für Sie</li>
+                                        <li>Sichere Datenspeicherung</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 d-flex gap-2 flex-wrap justify-content-center">
+                        <button type="button" class="btn btn-primary" onclick="showCookieSettings()">
+                            <i class="fas fa-cog"></i> Cookie-Einstellungen öffnen
+                        </button>
+                        <button type="button" class="btn btn-outline-warning" onclick="resetCookieSettings()">
+                            <i class="fas fa-undo"></i> Einstellungen zurücksetzen
+                        </button>
+                        <a href="{% url 'privacy_policy' %}" class="btn btn-outline-secondary">
+                            <i class="fas fa-shield-alt"></i> Datenschutzerklärung
+                        </a>
+                        <a href="{% url 'contact' %}" class="btn btn-outline-info">
+                            <i class="fas fa-envelope"></i> Fragen stellen
+                        </a>
+                    </div>
+
+                    <hr class="my-4">
+                    <p class="text-muted text-center">
+                        <small>
+                            Stand: {{ "now"|date:"d.m.Y" }} | 
+                            Diese Cookie-Richtlinie gilt für die gesamte Website kidme.de
+                        </small>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Cookie-Details anzeigen
+function showCurrentCookies() {
+    const cookies = document.cookie.split(';').map(cookie => cookie.trim());
+    const cookieList = cookies.length > 0 ? cookies.join('\n') : 'Keine Cookies gefunden';
+    alert('Aktuelle Cookies:\n\n' + cookieList);
+}
+
+// Cookie-Größe berechnen
+function calculateCookieSize() {
+    const totalSize = new Blob([document.cookie]).size;
+    const sizeKB = (totalSize / 1024).toFixed(2);
+    alert(`Gesamtgröße aller Cookies: ${sizeKB} KB`);
+}
+</script>
+{% endblock %}

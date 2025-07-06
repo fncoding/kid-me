@@ -1,0 +1,73 @@
+<div id="cookie-banner" class="cookie-banner" style="display: none;">
+    <div class="cookie-content">
+        <div class="cookie-text">
+            <h5>🍪 Cookies & Datenschutz</h5>
+            <p>Wir verwenden notwendige Cookies für die Funktionalität der Website. 
+               Mit Ihrer Zustimmung nutzen wir auch Analyse-Cookies zur Verbesserung unserer Website.</p>
+        </div>
+        <div class="cookie-actions">
+            <button type="button" class="btn btn-outline-secondary btn-sm" onclick="acceptEssentialOnly()">
+                Nur notwendige
+            </button>
+            <button type="button" class="btn btn-outline-info btn-sm" onclick="showCookieSettings()">
+                Einstellungen
+            </button>
+            <button type="button" class="btn btn-outline-light btn-sm" onclick="acceptAllCookies()">
+                Alle akzeptieren
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Cookie-Einstellungen Modal -->
+<div class="modal fade" id="cookieSettingsModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Cookie-Einstellungen</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="cookie-category">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="essential-cookies" checked disabled>
+                        <label class="form-check-label" for="essential-cookies">
+                            <strong>Notwendige Cookies</strong>
+                        </label>
+                    </div>
+                    <small class="text-muted">Diese Cookies sind für die Grundfunktionen der Website erforderlich.</small>
+                </div>
+                
+                <div class="cookie-category mt-3">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="analytics-cookies">
+                        <label class="form-check-label" for="analytics-cookies">
+                            <strong>Analyse-Cookies</strong>
+                        </label>
+                    </div>
+                    <small class="text-muted">
+                        Helfen uns zu verstehen, wie Besucher mit der Website interagieren.
+                        <br><strong>Anbieter:</strong> Lokal gespeicherte Statistiken
+                        <br><strong>Zweck:</strong> Anonyme Nutzungsanalyse
+                        <br><strong>Speicherdauer:</strong> 2 Jahre
+                    </small>
+                </div>
+                
+                <div class="cookie-category mt-3">
+                    <h6>Informationen zum Consent</h6>
+                    <small class="text-muted">
+                        Ihre Einstellungen werden lokal in Ihrem Browser gespeichert und jährlich erneuert.
+                        Sie können diese jederzeit in den Cookie-Einstellungen ändern.
+                    </small>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-warning btn-sm" onclick="resetCookieSettings()">
+                    <i class="fas fa-undo"></i> Zurücksetzen
+                </button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Abbrechen</button>
+                <button type="button" class="btn btn-success" onclick="saveCookieSettings()">Speichern</button>
+            </div>
+        </div>
+    </div>
+</div>

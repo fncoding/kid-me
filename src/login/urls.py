@@ -5,7 +5,6 @@ from .views import profile_edit_view, activate_view
 
 urlpatterns = [
     path('', views.home_view, name='home'),
-   
     path('dashboard/', views.dashboard_view, name='dashboard'),
     path('register/', views.register_view, name='register'),
     path('password_change/', auth_views.PasswordChangeView.as_view(
@@ -27,4 +26,5 @@ urlpatterns = [
         template_name='pw-reset/password_reset_complete.html'
     ), name='password_reset_complete'),
     path('activate/<uidb64>/<token>/', activate_view, name='activate'),
+    path('export-data/', views.export_user_data, name='export_user_data'),
 ]

@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}Account löschen{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-center align-items-center min-vh-100 pt-4 mt-2">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="card main-card border-danger">
+                    <div class="card-body p-4">
+                        <h2 class="card-title text-danger text-center mb-4">Account löschen</h2>
+                        {% include 'components/separator.html' %}
+                        
+                        <div class="alert alert-danger">
+                            <strong>⚠️ Warnung!</strong><br>
+                            Diese Aktion löscht unwiderruflich:
+                            <ul class="mt-2 mb-0">
+                                <li>Ihren Account und alle persönlichen Daten</li>
+                                <li>Alle Ihre Einkaufslisten</li>
+                                <li>Alle Ihre Lagerbestände</li>
+                                <li>Alle Ihre Produkte</li>
+                            </ul>
+                        </div>
+
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="confirmation_text" class="form-label">
+                                    Geben Sie <strong>LÖSCHEN</strong> ein, um zu bestätigen:
+                                </label>
+                                <input type="text" name="confirmation_text" id="confirmation_text" 
+                                       class="form-control" placeholder="LÖSCHEN" required>
+                            </div>
+                            
+                            <input type="hidden" name="delete_account_confirm" value="1">
+                            
+                            <div class="d-grid gap-2">
+                                <button type="submit" class="btn btn-danger">
+                                    Account endgültig löschen
+                                </button>
+                                <a href="{% url 'profile_edit' %}" class="btn btn-secondary">
+                                    Abbrechen
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

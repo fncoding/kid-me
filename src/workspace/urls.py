@@ -18,6 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,5 +29,7 @@ urlpatterns = [
     path('shoppinglists/', include('shoppinglists.urls')),
     path('contact/', include('contact.urls')),
     path('stocks/', include('stocks.urls')),
-    path('mystack/', include('mystack.urls')) 
+    path('mystack/', include('mystack.urls')),
+    path('privacy/', TemplateView.as_view(template_name='privacy_policy.html'), name='privacy_policy'),
+    path('cookies/', TemplateView.as_view(template_name='cookie_policy.html'), name='cookie_policy')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # Für Media-Dateien im Entwicklungsmodus

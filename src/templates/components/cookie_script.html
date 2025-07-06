@@ -1,0 +1,240 @@
+<!-- filepath: src/templates/components/cookie_script.html -->
+<script>
+// Cookie-Management System
+class CookieManager {
+    constructor() {
+        this.cookieConsent = this.getCookieConsent();
+        this.init();
+    }
+
+    init() {
+        console.log('Cookie Manager initialized');
+        console.log('Current consent:', this.cookieConsent);
+        
+        // Cookie-Banner anzeigen wenn keine Zustimmung vorhanden oder abgelaufen
+        if (!this.cookieConsent.hasConsent || this.isConsentExpired()) {
+            console.log('Showing cookie banner - no consent or expired');
+            if (this.isConsentExpired()) {
+                console.log('Consent expired, resetting');
+                this.resetCookieSettings();
+            }
+            this.showCookieBanner();
+        } else {
+            console.log('Consent already given, loading cookies');
+            // Cookies basierend auf Zustimmung laden
+            this.loadCookies();
+        }
+    }
+
+    showCookieBanner() {
+        console.log('Attempting to show cookie banner');
+        const banner = document.getElementById('cookie-banner');
+        if (banner) {
+            banner.style.display = 'block';
+            console.log('Cookie banner is now visible');
+        } else {
+            console.error('Cookie banner element not found!');
+        }
+    }
+
+    hideCookieBanner() {
+        document.getElementById('cookie-banner').style.display = 'none';
+    }
+
+    getCookieConsent() {
+        try {
+            const consent = localStorage.getItem('cookieConsent');
+            if (consent) {
+                const parsed = JSON.parse(consent);
+                // Validierung der Consent-Struktur
+                if (this.isValidConsent(parsed)) {
+                    return parsed;
+                }
+            }
+        } catch (e) {
+            console.warn('Cookie consent data corrupted, resetting');
+            localStorage.removeItem('cookieConsent');
+        }
+        return {
+            hasConsent: false,
+            essential: true,
+            analytics: false,
+            timestamp: null,
+            version: '1.0'
+        };
+    }
+
+    isValidConsent(consent) {
+        return consent &&
+               typeof consent.hasConsent === 'boolean' &&
+               typeof consent.essential === 'boolean' &&
+               typeof consent.analytics === 'boolean' &&
+               (consent.timestamp === null || typeof consent.timestamp === 'string');
+    }
+
+    saveCookieConsent(settings) {
+        // Input-Validierung
+        if (!settings || typeof settings !== 'object') {
+            console.error('Invalid cookie settings provided');
+            return;
+        }
+
+        // Sanitize und validiere Eingaben
+        const sanitizedSettings = {
+            essential: Boolean(settings.essential),
+            analytics: Boolean(settings.analytics),
+            timestamp: new Date().toISOString(),
+            hasConsent: true,
+            version: '1.0'
+        };
+
+        try {
+            localStorage.setItem('cookieConsent', JSON.stringify(sanitizedSettings));
+            this.cookieConsent = sanitizedSettings;
+            this.hideCookieBanner();
+            this.loadCookies();
+            
+            // Event für andere Scripts
+            window.dispatchEvent(new CustomEvent('cookieConsentChanged', {
+                detail: sanitizedSettings
+            }));
+        } catch (e) {
+            console.error('Failed to save cookie consent:', e);
+            alert('Fehler beim Speichern der Cookie-Einstellungen. Bitte versuchen Sie es erneut.');
+        }
+    }
+
+    loadCookies() {
+        // Notwendige Cookies (immer laden)
+        this.loadEssentialCookies();
+        
+        // Analyse-Cookies nur bei Zustimmung
+        if (this.cookieConsent.analytics) {
+            this.loadAnalyticsCookies();
+        }
+    }
+
+    loadEssentialCookies() {
+        // CSRF-Token und Session-Cookies sind bereits durch Django aktiv
+        console.log('Essential cookies loaded');
+    }
+
+    loadAnalyticsCookies() {
+        // Beispiel: Google Analytics oder andere Tracking-Scripts
+        console.log('Analytics cookies loaded');
+        // Hier würden Sie Tracking-Scripts laden
+    }
+
+    deleteCookies(category) {
+        if (category === 'analytics') {
+            // Analyse-Cookies löschen
+            const analyticsCookies = ['_ga', '_gid', '_gat', '_gtag', '_gcl_au'];
+            const domains = [window.location.hostname, '.' + window.location.hostname];
+            
+            analyticsCookies.forEach(cookie => {
+                domains.forEach(domain => {
+                    // Verschiedene Pfade probieren
+                    ['/', '/src/', '/admin/'].forEach(path => {
+                        document.cookie = `${cookie}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${path}; domain=${domain};`;
+                        document.cookie = `${cookie}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=${path};`;
+                    });
+                });
+            });
+            console.log('Analytics cookies deleted');
+        }
+    }
+
+    // Neue Methode: Cookie-Einstellungen zurücksetzen
+    resetCookieSettings() {
+        try {
+            localStorage.removeItem('cookieConsent');
+            this.deleteCookies('analytics');
+            this.cookieConsent = this.getCookieConsent();
+            this.showCookieBanner();
+        } catch (e) {
+            console.error('Error resetting cookie settings:', e);
+        }
+    }
+
+    // Neue Methode: Prüfung ob Consent noch gültig ist (z.B. nach 1 Jahr neu fragen)
+    isConsentExpired() {
+        if (!this.cookieConsent.timestamp) return true;
+        
+        const consentDate = new Date(this.cookieConsent.timestamp);
+        const oneYearAgo = new Date();
+        oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
+        
+        return consentDate < oneYearAgo;
+    }
+}
+
+// Global verfügbare Funktionen für Cookie-Banner
+function acceptAllCookies() {
+    if (window.cookieManager) {
+        window.cookieManager.saveCookieConsent({
+            essential: true,
+            analytics: true
+        });
+    }
+}
+
+function acceptEssentialOnly() {
+    if (window.cookieManager) {
+        window.cookieManager.saveCookieConsent({
+            essential: true,
+            analytics: false
+        });
+    }
+}
+
+function showCookieSettings() {
+    try {
+        const modal = new bootstrap.Modal(document.getElementById('cookieSettingsModal'));
+        
+        // Aktuelle Einstellungen in Modal laden
+        if (window.cookieManager && window.cookieManager.cookieConsent) {
+            const analyticsCheckbox = document.getElementById('analytics-cookies');
+            if (analyticsCheckbox) {
+                analyticsCheckbox.checked = window.cookieManager.cookieConsent.analytics;
+            }
+        }
+        
+        modal.show();
+    } catch (e) {
+        console.error('Error showing cookie settings:', e);
+    }
+}
+
+function saveCookieSettings() {
+    try {
+        const analytics = document.getElementById('analytics-cookies')?.checked || false;
+        
+        if (window.cookieManager) {
+            window.cookieManager.saveCookieConsent({
+                essential: true,
+                analytics: analytics
+            });
+        }
+        
+        const modal = bootstrap.Modal.getInstance(document.getElementById('cookieSettingsModal'));
+        if (modal) {
+            modal.hide();
+        }
+    } catch (e) {
+        console.error('Error saving cookie settings:', e);
+        alert('Fehler beim Speichern der Einstellungen. Bitte versuchen Sie es erneut.');
+    }
+}
+
+// Neue Funktion: Cookie-Einstellungen zurücksetzen
+function resetCookieSettings() {
+    if (window.cookieManager && confirm('Möchten Sie wirklich alle Cookie-Einstellungen zurücksetzen?')) {
+        window.cookieManager.resetCookieSettings();
+    }
+}
+
+// Cookie-Manager initialisieren
+document.addEventListener('DOMContentLoaded', function() {
+    window.cookieManager = new CookieManager();
+});
+</script>

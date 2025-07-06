@@ -1,0 +1,258 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Datenschutzerklärung
+{% endblock %}
+
+{% block content %}
+  {% csrf_token %}
+  <meta name="csrf-token" content="{{ csrf_token }}" />
+  <div class="container mt-5 pt-navbar">
+    <div class="row justify-content-center">
+      <div class="col">
+        <div class="card main-card">
+          <div class="card-body p-4">
+            <h1 class="mb-4">Datenschutzerklärung</h1>
+            {% include 'components/separator.html' %}
+
+            <h2>1. Verantwortlicher</h2>
+            <p>
+              Verantwortlicher für die Datenverarbeitung auf dieser Website ist:<br />
+              <strong>Felix Neumann</strong><br />
+              E-Mail: <a href="mailto:admin@felixneumann.me">admin@felixneumann.me</a>
+            </p>
+            <p class="text-muted">
+              <small><strong>Hinweis:</strong> Als Privatperson/kleines Projekt ist kein Datenschutzbeauftragter bestellt, da die gesetzlichen Voraussetzungen nach Art. 37 DSGVO nicht erfüllt sind.</small>
+            </p>
+            {% include 'components/separator.html' %}
+            <h2>2. Arten der verarbeiteten Daten</h2>
+            <p>Diese Haushalts-App verarbeitet folgende Daten:</p>
+            <ul>
+              <li>
+                <strong>Registrierungsdaten:</strong> Benutzername, E-Mail-Adresse (freiwillig)
+              </li>
+              <li>
+                <strong>Anwendungsdaten:</strong> Einkaufslisten, Haushaltsaufgaben, Notizen
+              </li>
+              <li>
+                <strong>Technische Daten:</strong> IP-Adresse, Browser-Typ, Zugriffszeitpunkt
+              </li>
+              <li>
+                <strong>Cookies:</strong> Session-Cookies für die Funktionalität
+              </li>
+            </ul>
+            {% include 'components/separator.html' %}
+            <h2>3. Zwecke und Rechtsgrundlagen</h2>
+            <div class="row">
+              <div class="col-md-6">
+                <h3>3.1 App-Funktionalität</h3>
+                <p>
+                  <strong>Zweck:</strong> Bereitstellung der Haushalts-Verwaltung<br />
+                  <strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung)
+                </p>
+              </div>
+              <div class="col-md-6">
+                <h3>3.2 Technische Sicherheit</h3>
+                <p>
+                  <strong>Zweck:</strong> Schutz vor Missbrauch, Fehlerdiagnose<br />
+                  <strong>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse)
+                </p>
+              </div>
+            </div>
+            {% include 'components/separator.html' %}
+            <h2>4. Datenverarbeitung im Detail</h2>
+            <div class="accordion" id="dataProcessingAccordion">
+              <div class="accordion-item">
+                <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#cookies">Cookies</button></h2>
+                <div id="cookies" class="accordion-collapse collapse" data-bs-parent="#dataProcessingAccordion">
+                  <div class="accordion-body">
+                    <h5>Notwendige Cookies (immer aktiv)</h5>
+                    <ul>
+                      <li>
+                        <strong>sessionid:</strong> Django Session-Management
+                      </li>
+                      <li>
+                        <strong>csrftoken:</strong> Schutz vor Cross-Site-Request-Forgery
+                      </li>
+                      <li>
+                        <strong>cookieConsent:</strong> Speichert Ihre Cookie-Einstellungen
+                      </li>
+                    </ul>
+                    <h5>Optionale Cookies (nur mit Zustimmung)</h5>
+                    <ul>
+                      <li>
+                        <strong>Analyse-Cookies:</strong> Anonyme Nutzungsstatistiken
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header"><button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#dataStorage">Datenspeicherung</button></h2>
+                <div id="dataStorage" class="accordion-collapse collapse" data-bs-parent="#dataProcessingAccordion">
+                  <div class="accordion-body">
+                    <ul>
+                      <li>
+                        <strong>Registrierungsdaten:</strong> Bis zur Löschung des Accounts
+                      </li>
+                      <li>
+                        <strong>Anwendungsdaten:</strong> Bis zur manuellen Löschung oder Account-Löschung
+                      </li>
+                      <li>
+                        <strong>Log-Daten:</strong> Maximal 30 Tage
+                      </li>
+                      <li>
+                        <strong>Session-Daten:</strong> Bis zum Browser-Neustart oder Logout
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {% include 'components/separator.html' %}
+            <h2>5. Ihre Rechte nach DSGVO</h2>
+            <div class="row">
+              <div class="col-md-6">
+                <h5>Auskunft & Kontrolle</h5>
+                <ul>
+                  <li>Auskunft über gespeicherte Daten (Art. 15)</li>
+                  <li>Berichtigung falscher Daten (Art. 16)</li>
+                  <li>Löschung Ihrer Daten (Art. 17)</li>
+                  <li>Einschränkung der Verarbeitung (Art. 18)</li>
+                </ul>
+              </div>
+              <div class="col-md-6">
+                <h5>Widerspruch & Übertragung</h5>
+                <ul>
+                  <li>Widerspruch gegen Verarbeitung (Art. 21)</li>
+                  <li>Datenübertragbarkeit (Art. 20)</li>
+                  <li>Beschwerde bei Aufsichtsbehörde (Art. 77)</li>
+                  <li>Widerruf von Einwilligungen</li>
+                </ul>
+              </div>
+            </div>
+            {% include 'components/separator.html' %}
+            <div class="alert p-0 m-0 alert-info">
+              <h5>🛡️ Datenschutz-freundliche App</h5>
+              <p class="mb-1">Diese App wurde bewusst datenschutzfreundlich entwickelt:</p>
+              <ul class="mb-0">
+                <li>Minimale Datenerhebung (Data Minimization)</li>
+                <li>Lokale Datenspeicherung wo möglich</li>
+                <li>Keine Weitergabe an Dritte</li>
+                <li>Transparente Cookie-Verwendung</li>
+              </ul>
+            </div>
+            {% include 'components/separator.html' %}
+            <h2>6. Kontakt & Beschwerden</h2>
+            <div class="row">
+              <div class="col-md-6">
+                <h5>Fragen zum Datenschutz</h5>
+                <p>
+                  Bei Fragen zu Ihren Daten kontaktieren Sie uns:<br />
+                  E-Mail: <a href="mailto:datenschutz@kidme.de">datenschutz@kidme.de</a>
+                </p>
+              </div>
+              <div class="col-md-6">
+                <h5>Aufsichtsbehörde</h5>
+                <p>
+                  Sie können sich bei der zuständigen Datenschutz-Aufsichtsbehörde beschweren:<br />
+                  <a href="https://www.bfdi.bund.de/" target="_blank" rel="noopener">Bundesbeauftragte für Datenschutz und Informationsfreiheit</a>
+                </p>
+              </div>
+            </div>
+            {% include 'components/separator.html' %}
+            <div class="mt-4 d-flex gap-2 flex-wrap">
+              <button type="button" class="btn btn-outline-info" onclick="showCookieSettings()"><i class="fas fa-cookie-bite"></i> Cookie-Einstellungen</button>
+              <a href="{% url 'contact' %}" class="btn btn-outline-secondary"><i class="fas fa-envelope"></i> Kontakt aufnehmen</a>
+              {% if user.is_authenticated %}
+                <button type="button" class="btn btn-outline-danger" onclick="downloadMyData()"><i class="fas fa-download"></i> Meine Daten herunterladen</button>
+                <button type="button" class="btn btn-outline-warning" onclick="deleteMyAccount()"><i class="fas fa-user-times"></i> Account löschen</button>
+              {% endif %}
+            </div>
+
+            <hr class="my-4" />
+            <p class="text-muted text-center">
+              <small>Stand: {{ 'now'|date:'d.m.Y' }} | Diese Datenschutzerklärung wurde für ein privates Haushalts-App-Projekt erstellt.</small>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    async function downloadMyData() {
+      try {
+        // CSRF-Token holen
+        const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        
+        const response = await fetch('{% url "export_user_data" %}', {
+            method: 'POST',  // POST statt GET
+            headers: {
+                'X-CSRFToken': csrfToken,
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        // Datei-Download
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = url;
+        a.download = `meine-daten-kidme-${new Date().toISOString().split('T')[0]}.json`;
+        document.body.appendChild(a);
+        a.click();
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+
+        alert('Daten erfolgreich heruntergeladen!');
+    } catch (error) {
+        console.error('Download error:', error);
+        alert('Fehler beim Herunterladen der Daten: ' + error.message);
+    }
+    }
+    
+    function deleteMyAccount() {
+      const confirmation = prompt('Um Ihren Account zu löschen, geben Sie "LÖSCHEN" ein:')
+      if (confirmation === 'LÖSCHEN') {
+        if (confirm('Sind Sie sich wirklich sicher? Diese Aktion kann nicht rückgängig gemacht werden!')) {
+          window.location.href = '{% url "profile_edit" %}?delete_account=1'
+        }
+      }
+    }
+    
+    // Helper function to get CSRF cookie
+    function getCookie(name) {
+      let cookieValue = null
+      if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';')
+        for (let i = 0; i < cookies.length; i++) {
+          const cookie = cookies[i].trim()
+          if (cookie.substring(0, name.length + 1) === name + '=') {
+            cookieValue = decodeURIComponent(cookie.substring(name.length + 1))
+            break
+          }
+        }
+      }
+      return cookieValue
+    }
+  </script>
+
+  <!-- Success Toast -->
+  <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="successToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <i class="fas fa-check-circle text-success me-2"></i>
+        <strong class="me-auto">Erfolgreich</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">Ihre Daten wurden erfolgreich heruntergeladen.</div>
+    </div>
+  </div>
+{% endblock %}
